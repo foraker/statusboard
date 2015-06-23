@@ -2,14 +2,18 @@
 <h3 id="subtitle">Current Status: Too cool for school</h2>
 
 
+<% github = Github.new oauth_token: 'b6421041a9a11d17725619d8f12b8b420406adce' %>
+<% repos = github.repos.list user: "foraker" %>
+
 <%
 client = Twitter::REST::Client.new do |config|
-  config.consumer_key        = "7otwKQWKo6S2M4jYZdsl4gSI2"
-  config.consumer_secret     = "4s3u5mqievJtHd0SO9dDukOOs8dWrcGyTr6YS4gqaAmXJsapPt"
-  config.access_token        = "2176641595-29ZXPRhOtBC3mXu2icYLl0QgwhqiAMJc0mXkH5V"
-  config.access_token_secret = "SP8lwkfv1KYSgi6cbNr62saHlp53SbW9Ne8vFcxDOLHvr"
+  config.consumer_key        = "wR3LpdwTulJTjmBDVTdY6BFxK"
+  config.consumer_secret     = "XbVwJ7uEXRLzsk7kWKBEnwPcZIm4vuJgJULnyV1jzxeUrqijW2"
+  config.access_token        = "24077839-8vkgQgIwFJdfNzdoZf39i56vgBxZKEdNfiroPQIlO"
+  config.access_token_secret = "Arxgewj1EW8OzUUNt4HTiGfKpDHGieTY6DEVVLFHI37zw"
 end
 %>
+
 
 
 <div id="twitter">
@@ -19,7 +23,7 @@ end
     </div>
 
     <div id="feed">
-      <% client.user_timeline("forakerlabs", count:15, contributor_details:true).each do |tweet| %>
+      <% client.mentions_timeline(count:15).each do |tweet| %>
         <span id="user_name">
         <%= "#{tweet.user.screen_name}: " %>
         </span>
@@ -35,5 +39,41 @@ end
 
 
 
+
   </div>
+</div>
+
+
+
+
+
+
+
+<div id="github">
+
+  <div class="panel panel-danger">
+    <div class="panel-heading">
+      <h3 class="panel-title">Pull Requests</h3>
+    </div>
+
+    <div id="gitfeed">
+      <% repos.each do |repo| %>
+        <% pulls =  github.pull_requests.list "foraker", repo.name %>
+          <% pulls.each do |pull| %>
+            <span id="repo">
+              <%= "#{pull.head.repo.name.capitalize}: " %>
+            </span>
+            <span id="pull">
+              <%= "#{pull.title}" %>
+            </span>
+            <br>
+            <p>Author:
+              <span id="author">
+                <%= "#{pull.user.login}" %>
+              </span>
+            </p>
+            <hr>
+          <% end %>
+      <% end %>
+      </div>
 </div>

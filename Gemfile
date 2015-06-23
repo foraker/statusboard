@@ -30,6 +30,8 @@ gem "active_model_serializers"
 gem "rack-cors", require: "rack/cors"
 
 gem 'twitter'
+gem 'github_api', '~> 0.12.3'
+
 gem 'bootstrap-sass', '~> 3.3.5'
 
 # Use ActiveModel has_secure_password

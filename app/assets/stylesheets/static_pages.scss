@@ -20,15 +20,11 @@ h3{
   color: white;
 }
 
-p{
-  color:white;
-}
 
 #twitterFeed{
   background-color: black;
   color: white;
   font-size:125%;
-
 
 }
 
@@ -36,6 +32,7 @@ p{
   width:30%;
   padding-left: 30px;
   padding-top: 20px;
+  float: left;
 
 }
 
@@ -57,7 +54,26 @@ p{
 
 #title{
   text-align:center;
+  color: white;
 }
 #subtitle{
   text-align:center;
+  color: white;
+}
+
+#repo{
+  font-weight:bold;
+}
+
+#github{
+  width:30%;
+  padding-right: 30px;
+  padding-left: 30px;
+  padding-top: 20px;
+  float:left;
+
+}
+
+#gitfeed{
+  font-size:125%;
 }
