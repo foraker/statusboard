@@ -1,0 +1,24 @@
+<h1 id="title">Status Board</h1>
+<h3 id="subtitle">Current Status: Too cool for school</h2>
+
+<div id="twitter">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title">Twitter Feed</h3>
+    </div>
+
+    <div id="feed">
+      <% @tweets.each do |tweet| %>
+        <span id="user_name">
+          <%= "#{tweet.user.screen_name}: " %>
+        </span>
+        <span id="tweet">
+          <%= tweet.full_text %>
+        </span>
+
+        <hr>
+
+      <% end %>
+    </div>
+  </div>
+</div>
