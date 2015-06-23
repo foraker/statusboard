@@ -1,0 +1,39 @@
+<h1 id="title">Status Board</h1>
+<h3 id="subtitle">Current Status: Too cool for school</h2>
+
+
+<%
+client = Twitter::REST::Client.new do |config|
+  config.consumer_key        = "7otwKQWKo6S2M4jYZdsl4gSI2"
+  config.consumer_secret     = "4s3u5mqievJtHd0SO9dDukOOs8dWrcGyTr6YS4gqaAmXJsapPt"
+  config.access_token        = "2176641595-29ZXPRhOtBC3mXu2icYLl0QgwhqiAMJc0mXkH5V"
+  config.access_token_secret = "SP8lwkfv1KYSgi6cbNr62saHlp53SbW9Ne8vFcxDOLHvr"
+end
+%>
+
+
+<div id="twitter">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title">Twitter Feed</h3>
+    </div>
+
+    <div id="feed">
+      <% client.user_timeline("forakerlabs", count:15, contributor_details:true).each do |tweet| %>
+        <span id="user_name">
+        <%= "#{tweet.user.screen_name}: " %>
+        </span>
+        <span id="tweet">
+        <%= "#{tweet.full_text}" %>
+        </span>
+
+        <hr>
+
+      <% end %>
+    </div>
+
+
+
+
+  </div>
+</div>

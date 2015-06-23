@@ -1,0 +1,63 @@
+// Place all the styles related to the StaticPages controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+body{
+  background-color: black;
+}
+
+h1{
+  color:white;
+}
+
+h2{
+  color:white;
+}
+h3{
+  color: white;
+}
+
+p{
+  color:white;
+}
+
+#twitterFeed{
+  background-color: black;
+  color: white;
+  font-size:125%;
+
+
+}
+
+#twitter{
+  width:30%;
+  padding-left: 30px;
+  padding-top: 20px;
+
+}
+
+#feed{
+  max-height: 500px;
+  overflow-y: scroll;
+}
+
+.panel panel-primary{
+  width:30%;
+  max-height: 200px;
+  overflow-y: scroll;
+
+}
+
+#user_name{
+  font-weight:bold;
+}
+
+#title{
+  text-align:center;
+}
+#subtitle{
+  text-align:center;
+}
