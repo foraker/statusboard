@@ -6,10 +6,22 @@ class TwitterClient
       config.access_token        = options.twitter_access_token
       config.access_token_secret = options.twitter_access_token_secret
     end
+  end
 
-    def latest_mentions(count = 15)
-      client.mentions_timeline(count: count)
+  def latest_mentions(count)
+    client.mentions_timeline(count: count)
+  end
+
+  def getProfiles(tweets)
+    profile_urls = Array.new
+    tweets.each do |tweet|
+      profile_urls << tweet.user.profile_image_uri('original')
     end
+    return profile_urls
+  end
+
+  def getURLs(tweets)
+    extract_urls(tweets[0].full_text)
   end
 
   private

@@ -23,9 +23,8 @@ describe TwitterClient do
     end
 
     it 'returns the latest mention' do
-      allow(twitter_client).to receive(:mentions_timeline).with(count: 5).and_return(
-        mentions
-      )
+      allow(twitter_client).to receive(:mentions_timeline)
+        .with(count: 5).and_return(mentions)
 
       expect(client.latest_mentions(5)).to eq mentions
     end
