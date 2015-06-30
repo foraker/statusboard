@@ -3,71 +3,53 @@ class GithubClient
     self.github = Github.new user: "foraker", oauth_token: options.github_oauth
   end
 
-  def getRepos()
-    repos = github.repos.list :org => 'foraker'
-  end
-
-  def getIssues()
-    pulls = Array.new
-    issues = github.issues.list(:org => 'foraker', :filter => 'all')
-    issues.each do |pull|
-      if pull["pull_request"] then
-        comments = github.issues.comments.list(owner: 'foraker',
-                                               repo: pull.repository.name,
-                                               number: pull.number)
-        thumbs = 0
-        comments.each do |comment|
-          thumbs += comment.body.scan(/:\+1:/).length
-        end
-        temp = PullRequest.new(pull.repository.name.capitalize,
-                               pull.title,
-                               pull.user.login,
-                               pull.user.avatar_url,
-                               thumbs,
-                               pull.html_url)
-        pulls.push(temp)
-      end
-    end
-    return pulls
+  def pull_requests
+    prs = issues.select(&:pull_request?)
+    PullRequest.wrap(prs, github)
   end
 
   private
 
   attr_accessor :github
+
+  def issues
+    github.issues.list(org: 'foraker', filter: 'all')
+  end
 end
 
-#This is a very Java way to do this. I bet there's a better Ruby way
 class PullRequest
-  def initialize(repo, title, author, avatar_url, thumbs, pull_url)
-    @repo = repo
-    @title = title
-    @author = author
-    @avatar_url = avatar_url
-    @thumbs = thumbs
-    @pull_url = pull_url
+  def self.wrap(pull_requests, api_client)
+    pull_requests.map { |pr| self.new(pr, api_client) }
   end
 
-  def getRepo
-    return @repo
+  delegate :number, :title, :html_url, :repository, :user, to: :pull_request
+  delegate :name, to: :repository
+  delegate :login, :avatar_url, to: :user, prefix: true
+
+  def initialize(pull_request, api_client)
+    @pull_request = pull_request
+    @api_client = api_client
   end
 
-  def getTitle
-    return @title
+  def thumbs
+    @thumbs ||= comments.sum do |comment|
+      comment.body.scan(/:\+1:/).length
+    end
   end
 
-  def getAuthor
-    return @author
+  def repository_name
+    name.capitalize
   end
 
-  def getAvatar
-    return @avatar_url
-  end
+  private
 
-  def getThumbs
-    return @thumbs
-  end
+  attr_reader :pull_request, :api_client
 
-  def getPullUrl
-    return @pull_url
+  def comments
+    api_client.issues.comments.list(
+      owner: 'foraker',
+      repo: name,
+      number: number
+    )
   end
 end

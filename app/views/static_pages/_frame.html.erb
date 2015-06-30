@@ -1,0 +1,13 @@
+<% #TODO: Make photo frame have foraker logo by default or if link in tweet is not image %>
+<div id="photo-frame">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Photo Frame</h3>
+    </div>
+    <div class="panel-body">
+      <% if @status_board.has_image_url? then %>
+        <img src=<%= @status_board.photo_url %> >
+      <% end %>
+    </div>
+  </div>
+</div>

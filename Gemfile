@@ -33,6 +33,7 @@ gem 'twitter'
 gem 'twitter-text', '~> 1.12.0'
 gem 'github_api', '~> 0.12.3'
 gem 'font-awesome-rails', '~> 4.3.0.0'
+gem 'yahoo_weatherman', '~> 2.0.0'
 
 gem 'bootstrap-sass', '~> 3.3.5'
 

@@ -1,78 +1,10 @@
 <h1 id="title">Status Board</h1>
 <h3 id="subtitle">Foraker's Current Status: Too cool for school</h3>
 
-<% #TODO: move photoframe over to a new twitter so foraker doesn't get spammed with pictures/gifs %>
-<div id="twitter">
-  <div class="panel panel-primary">
-    <div class="panel-heading">
-      <h3 class="panel-title">Twitter Feed</h3>
-    </div>
-    <div id="feed">
-      <% @tweets.each_with_index do |tweet, i| %>
-        <div class="media">
-          <div class="media-left">
-            <a href= <%= tweet.user.uri %> >
-              <img class="media-object" src= <%= @profiles[i] %> >
-            </a>
-          </div>
-          <div class="media-body">
-            <h4 class="media-heading">
-              <%= "#{tweet.user.screen_name}: " %>
-            </h4>
-              <%= raw @parser.auto_link_urls(tweet.full_text) %>
-          </div>
-        </div>
-      <% end %>
-    </div>
-  </div>
-</div>
+<%= render 'twitter' %>
 
-<% #TODO: more styling maybe? %>
-<div id="github">
-  <div class="panel panel-danger">
-    <div class="panel-heading">
-      <h3 class="panel-title">Pull Requests</h3>
-    </div>
-    <div id="gitfeed">
-      <% @pulls.each do |pull| %>
-        <div class="media">
-          <div class="media-left">
-            <a href= <%= pull.getPullUrl %>>
-              <img class="media-object" src= <%= pull.getAvatar %> >
-            </a>
-          </div>
-          <div class="media-body">
-            <h4 class="media-heading">
-              <%= "#{pull.getRepo}: " %>
-            </h4>
-                <%= "#{pull.getTitle}" %>
-              <br>
-              <p>
-                <span id="author">
-                  <%= "Author: #{pull.getAuthor}" %>
-                </span>
-              </p>
-              <% pull.getThumbs.times do %>
-              <%= fa_stacked_icon "thumbs-o-up", base: "square-o" %>
-              <% end %>
-          </div>
-        </div>
-      <% end %>
-    </div>
-  </div>
-</div>
+<%= render 'github' %>
 
-<% #TODO: Make photo frame have foraker logo by default or if link in tweet is not image %>
-<div id="photo-frame">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h3 class="panel-title">Photo Frame</h3>
-    </div>
-    <div class="panel-body">
-    <% tweet = @tweets[0].full_text %>
-      <% if !@tweet_url.empty? then %>
-        <img src=<%= @tweet_url[0] %> >
-      <% end %>
-    </div>
-  </div>
-</div>
+<%= render 'frame' %>
+
+<%= render 'weather' %>

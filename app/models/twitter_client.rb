@@ -12,12 +12,8 @@ class TwitterClient
     client.mentions_timeline(count: count)
   end
 
-  def getProfiles(tweets)
-    profile_urls = Array.new
-    tweets.each do |tweet|
-      profile_urls << tweet.user.profile_image_uri('original')
-    end
-    return profile_urls
+  def getProfile(tweet)
+    tweet.user.profile_image_uri('original')
   end
 
   def getURLs(tweets)
