@@ -1,0 +1,16 @@
+<div id="weather">
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <h3 class="panel-title">Today's Weather</h3>
+    </div>
+    <div id="pic-desc">
+      <img src= <%= @status_board.weather_image %> ></img>
+      <p> <%= @status_board.weather_condition %> </p>
+    </div>
+    <div id ="temps">
+      <p> Current: <%=  "#{@status_board.current_temp}°F" %> </p>
+      <p> High: <%= "#{@status_board.high_temp}°F" %> </p>
+      <p> Low: <%=  "#{@status_board.low_temp}°F" %> </p>
+    </div>
+  </div>
+</div>

@@ -23,6 +23,20 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
+gem "grape"
+gem "grape-active_model_serializers"
+gem "grape-swagger-rails"
+gem "active_model_serializers"
+gem "rack-cors", require: "rack/cors"
+
+gem 'twitter'
+gem 'twitter-text', '~> 1.12.0'
+gem 'github_api', '~> 0.12.3'
+gem 'font-awesome-rails', '~> 4.3.0.0'
+gem 'yahoo_weatherman', '~> 2.0.0'
+
+gem 'bootstrap-sass', '~> 3.3.5'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -45,3 +59,7 @@ group :development, :test do
   gem 'spring'
 end
 
+group :development do
+  gem 'better_errors'
+  gem 'binding_of_caller'
+end

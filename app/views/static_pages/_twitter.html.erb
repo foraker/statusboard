@@ -1,0 +1,25 @@
+<% #TODO: move photoframe over to a new twitter so foraker doesn't get spammed with pictures/gifs %>
+<div id="twitter">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title">Twitter Feed</h3>
+    </div>
+    <div id="feed">
+      <% @status_board.tweets.each_with_index do |tweet, i| %>
+        <div class="media">
+          <div class="media-left">
+            <a href= <%= tweet.user.uri %> >
+              <img class="media-object" src= <%= @status_board.profile(tweet) %> >
+            </a>
+          </div>
+          <div class="media-body">
+            <h4 class="media-heading">
+              <%= "#{tweet.user.screen_name}: " %>
+            </h4>
+              <%= raw @status_board.parsed_url(tweet.full_text) %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

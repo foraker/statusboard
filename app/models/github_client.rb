@@ -1,0 +1,55 @@
+class GithubClient
+  def initialize(options = Rails.application.secrets)
+    self.github = Github.new user: "foraker", oauth_token: options.github_oauth
+  end
+
+  def pull_requests
+    prs = issues.select(&:pull_request?)
+    PullRequest.wrap(prs, github)
+  end
+
+  private
+
+  attr_accessor :github
+
+  def issues
+    github.issues.list(org: 'foraker', filter: 'all')
+  end
+end
+
+class PullRequest
+  def self.wrap(pull_requests, api_client)
+    pull_requests.map { |pr| self.new(pr, api_client) }
+  end
+
+  delegate :number, :title, :html_url, :repository, :user, to: :pull_request
+  delegate :name, to: :repository
+  delegate :login, :avatar_url, to: :user, prefix: true
+
+  def initialize(pull_request, api_client)
+    @pull_request = pull_request
+    @api_client = api_client
+  end
+
+  def thumbs
+    @thumbs ||= comments.sum do |comment|
+      comment.body.scan(/:\+1:/).length
+    end
+  end
+
+  def repository_name
+    name.capitalize
+  end
+
+  private
+
+  attr_reader :pull_request, :api_client
+
+  def comments
+    api_client.issues.comments.list(
+      owner: 'foraker',
+      repo: name,
+      number: number
+    )
+  end
+end
