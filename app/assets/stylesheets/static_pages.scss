@@ -6,6 +6,9 @@
 @import "bootstrap";
 @import "font-awesome";
 
+$panel-width: 20%;
+$panel-height: 300px;
+
 body {
   background-color: black;
 }
@@ -22,16 +25,21 @@ h3 {
   color: white;
 }
 
+marquee {
+  color: red;
+}
+
 #twitter {
+  //width: $panel-width;
   width: 30%;
-  padding-left: 30px;
-  padding-top: 20px;
+  padding-left: 60px;
+  padding-top: 40px;
   float: left;
+
 }
 
 #feed {
-  font-size: 125%;
-  max-height: 500px;
+  max-height: $panel-height;
   overflow-y: scroll;
   margin: 10px;
   img{
@@ -58,30 +66,10 @@ h3 {
   font-weight:bold;
 }
 
-#github {
-  width: 30%;
-  padding-left: 30px;
-  padding-top: 20px;
-  float:left;
-}
-
-#gitfeed {
-  font-size: 125%;
-  max-height: 500px;
-  overflow-y: scroll;
-  margin: 10px;
-  img{
-    max-width:64px;
-  }
-  #author{
-    font-style: italic;
-  }
-}
-
 #photo-frame {
   width: 30%;
   padding-left: 30px;
-  padding-top: 20px;
+  padding-top: 40px;
   float: left;
   img{
     width:100%;
@@ -90,9 +78,9 @@ h3 {
 }
 
 #weather {
-  width: 30%;
-  padding-left: 30px;
-  padding-top: 20px;
+  width: 20%;
+  padding-left: 60px;
+  padding-top: 40px;
   height: 200px;
   float: left;
   overflow: auto;
@@ -117,4 +105,25 @@ h3 {
     width: 52px;
     #max-width:600px;
   }
+}
+
+#graph {
+  float: left;
+  padding-left: 30px;
+  padding-top: 20px;
+}
+
+#git {
+  float: left;
+  width: 35%;
+  padding-left: 30px;
+  padding-top: 40px;
+
+  #git-feed{
+    //max-height: 360px;
+    max-height: $panel-height+20;
+    overflow-y: scroll;
+
+  }
+
 }

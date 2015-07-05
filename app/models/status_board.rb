@@ -7,6 +7,10 @@ class StatusBoard
     @twitter_client ||= TwitterClient.new
   end
 
+  def photo_client
+    @photo_client ||= PhotoClient.new
+  end
+
   def github_client
     @github_client ||= GithubClient.new
   end
@@ -17,6 +21,10 @@ class StatusBoard
 
   def parser_client
     @parser_client ||= UrlParser.new
+  end
+
+  def slack_client
+    @slack_client ||= SlackClient.new
   end
 
   def tweets
@@ -41,8 +49,7 @@ class StatusBoard
   end
 
   def photo_url
-    parser_client.extract_urls(tweets[0].full_text)[0]
-
+    parser_client.extract_urls(photo_client.latest_mentions(1)[0].full_text)[0]
   end
 
   #this will need to be updated to check if there's actually an image
@@ -68,5 +75,9 @@ class StatusBoard
 
   def low_temp
     weather.forecasts.first['low']
+  end
+
+  def new_chart(type, size)
+    Charts.new(type, size)
   end
 end

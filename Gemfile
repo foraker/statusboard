@@ -4,7 +4,8 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'
 # Use postgresql as the database for Active Record
-gem 'pg'
+#gem 'pg'
+gem 'sqlite3'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -34,7 +35,12 @@ gem 'twitter-text', '~> 1.12.0'
 gem 'github_api', '~> 0.12.3'
 gem 'font-awesome-rails', '~> 4.3.0.0'
 gem 'yahoo_weatherman', '~> 2.0.0'
+gem 'gruff', '~> 0.6.0'
+gem 'lita'
+gem 'lita-slack'
+gem 'slack-api', '~> 1.1.6'
 
+gem 'whenever', '~> 0.9.4'
 gem 'bootstrap-sass', '~> 3.3.5'
 
 # Use ActiveModel has_secure_password

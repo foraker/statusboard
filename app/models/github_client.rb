@@ -8,6 +8,10 @@ class GithubClient
     PullRequest.wrap(prs, github)
   end
 
+  def populate_commits
+
+  end
+
   private
 
   attr_accessor :github
@@ -22,7 +26,7 @@ class PullRequest
     pull_requests.map { |pr| self.new(pr, api_client) }
   end
 
-  delegate :number, :title, :html_url, :repository, :user, to: :pull_request
+  delegate :size, :number, :title, :html_url, :repository, :user, to: :pull_request
   delegate :name, to: :repository
   delegate :login, :avatar_url, to: :user, prefix: true
 
@@ -39,6 +43,10 @@ class PullRequest
 
   def repository_name
     name.capitalize
+  end
+
+  def commit_size
+    size
   end
 
   private
