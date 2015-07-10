@@ -1,6 +1,6 @@
-require 'models/twitter_client'
+require 'models/twitter_component'
 
-describe TwitterClient do
+describe TwitterComponent do
 
   module Twitter; module REST; class Client; end; end; end
 

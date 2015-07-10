@@ -1,4 +1,4 @@
-class GithubClient
+class GithubComponent
   def initialize(options = Rails.application.secrets)
     self.github = Github.new user: "foraker", oauth_token: options.github_oauth
   end
@@ -35,6 +35,10 @@ class PullRequest
     @thumbs ||= comments.sum do |comment|
       comment.body.scan(/:\+1:/).length
     end
+  end
+
+  def approved?
+    thumbs > 1
   end
 
   def repository_name

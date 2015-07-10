@@ -5,18 +5,18 @@
       <h3 class="panel-title">Twitter Feed</h3>
     </div>
     <div id="feed">
-      <% @status_board.tweets.each_with_index do |tweet, i| %>
+      <% component.latest_tweets.each_with_index do |tweet, i| %>
         <div class="media">
           <div class="media-left">
             <a href= <%= tweet.user.uri %> >
-              <img class="media-object" src= <%= @status_board.profile(tweet) %> >
+              <img class="media-object" src="<%= component.profile_image(tweet) %>">
             </a>
           </div>
           <div class="media-body">
             <h4 class="media-heading">
               <%= "#{tweet.user.screen_name}: " %>
             </h4>
-              <%= raw @status_board.parsed_url(tweet.full_text) %>
+              <%= raw tweet.text %>
           </div>
         </div>
       <% end %>

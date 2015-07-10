@@ -1,4 +1,4 @@
-class TwitterClient
+class TwitterComponent
   def initialize(options = Rails.application.secrets)
     self.client = Twitter::REST::Client.new do |config|
       config.consumer_key        = options.twitter_consumer_key
@@ -12,12 +12,8 @@ class TwitterClient
     client.mentions_timeline(count: count)
   end
 
-  def getProfile(tweet)
+  def profile_image(tweet)
     tweet.user.profile_image_uri('original')
-  end
-
-  def getURLs(tweets)
-    extract_urls(tweets[0].full_text)
   end
 
   private

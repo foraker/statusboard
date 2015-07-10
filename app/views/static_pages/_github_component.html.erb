@@ -15,20 +15,15 @@
           <th>Size</th>
           <th>Thumbs</th>
         </tr>
-        <% @status_board.pull_requests.each do |pull| %>
-          <% thumbs = pull.thumbs %>
-          <% if thumbs > 1 then %>
-            <tr class="success">
-          <% else %>
-            <tr class="danger">
-          <% end %>
-            <td id="repo-name"> <%= "#{pull.repository_name}" %> </td>
-            <td> <%= "#{pull.title}" %> </td>
-            <td> <%= "#{pull.user_login}" %> </td>
-            <td> <%= "#{pull.commit_size}" %> </td>
+        <% component.pull_requests.each do |pull| %>
+          <tr class="<%= pull.css_class %>">
+            <td id="repo-name"> <%= pull.repository_name %> </td>
+            <td> <%= pull.title %> </td>
+            <td> <%= pull.user_login %> </td>
+            <td> <%= pull.commit_size %> </td>
             <td>
               <%= fa_stacked_icon "thumbs-o-up", base: "square-o" %>
-              <%= "x #{thumbs}" %>
+              <%= "x #{pull.thumbs}" %>
             </td>
           </tr>
         <% end %>

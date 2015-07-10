@@ -1,6 +1,6 @@
 require "slack"
 
-class SlackClient
+class SlackBot
   def initialize(options = Rails.application.secrets)
     Slack.configure do |config|
       config.token = options.lita_token
@@ -37,11 +37,7 @@ class SlackClient
     Thread.new do
       client.start
     end
-
   end
-
-
-
 
   attr_accessor :client
 end

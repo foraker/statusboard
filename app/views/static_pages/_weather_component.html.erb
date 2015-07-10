@@ -1,0 +1,16 @@
+<div id="weather">
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <h3 class="panel-title">Today's Weather</h3>
+    </div>
+    <div id="pic-desc">
+      <img src= <%= component.weather_image %> ></img>
+      <p> <%= component.weather_condition %> </p>
+    </div>
+    <div id ="temps">
+      <p> Current: <%=  "#{component.current_temp}°F" %> </p>
+      <p> High: <%= "#{component.high_temp}°F" %> </p>
+      <p> Low: <%=  "#{component.low_temp}°F" %> </p>
+    </div>
+  </div>
+</div>

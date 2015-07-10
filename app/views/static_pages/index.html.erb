@@ -5,20 +5,6 @@
 <!-- <h1 id="title">Status Board</h1>
 <h3 id="subtitle">Foraker's Current Status: Too cool for school</h3> -->
 
-<%= render 'twitter' %>
-
-<%= render 'git' %>
-
-<%= render 'frame' %>
-
-<%= render 'weather' %>
-
-<!-- 
-<% @status_board.new_chart('Line', 600) %>
-
-<img id="graph" src= <%= asset_path('mygraph.jpg') %> /> 
--->
-
-<% @status_board.slack_client %>
-
-<%= javascript_include_tag "twitter_scroll" %>
+<% @status_board.components.each do |component| %>
+  <%= render component.partial, component: component %>
+<% end %>
