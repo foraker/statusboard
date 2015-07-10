@@ -5,6 +5,12 @@
 <!-- <h1 id="title">Status Board</h1>
 <h3 id="subtitle">Foraker's Current Status: Too cool for school</h3> -->
 
+<marquee id="announcement"  scrollamount=17> </marquee>
+
 <% @status_board.components.each do |component| %>
   <%= render component.partial, component: component %>
 <% end %>
+
+<script type="text/javascript">
+new Statusboard.AnnouncementMonitor();
+</script>

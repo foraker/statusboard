@@ -17,26 +17,78 @@ class SlackBot
     client.on :message do |data|
       case data['text']
         when 'statusboard hi'
-          Slack.chat_postMessage channel: data['channel'], text: "Hi <@#{data['user']}>!", as_user: true
+          hi data
+        when /^statusboard announce (.+)/
+          announce data, Regexp.last_match[1]
+        when /^statusboard marquee (.+)/
+          marquee data, Regexp.last_match[1]
         when 'statusboard who needs thumbs'
-          Slack.chat_postMessage channel: data['channel'], text: "hubot who needs thumbs", as_user: true
-        when 'statusboard lamp on'
-          Slack.chat_postMessage channel: data['channel'], text: "Turning lamp on...", as_user: true
-          system './outlet.sh'
-        when 'statusboard lamp off'
-          Slack.chat_postMessage channel: data['channel'], text: "Turning lamp off...", as_user: true
-          system './outlet.sh'
+          thumbs data
+        when 'statusboard party on'
+          party_on data
+        when 'statusboard party off'
+          party_off data
+        when 'statusboard commands'
+          commands data
         when /^statusboard/
-          Slack.chat_postMessage channel: data['channel'], text: "I don't take orders from you, <@#{data['user']}>", as_user: true
-          #render partial: slack, locals: {message: data['text']}
-          #javascript_include_tag 'slack'
+          method_missing data
         end
       end
-    #system "nohup client.start &"
 
     Thread.new do
       client.start
     end
+
+  end
+
+  private
+
+  def announce(data, words)
+    create_announcement data, words
+    Slack.chat_postMessage channel: '#general', text: "@channel #{user_real_name(data)}: #{words}", as_user: true, link_names: true
+  end
+
+  def marquee(data, words)
+    create_announcement data, words
+  end
+
+  def thumbs(data)
+    Slack.chat_postMessage channel: data['channel'], text: "hubot who needs thumbs", as_user: true
+  end
+
+  def hi(data)
+    Slack.chat_postMessage channel: data['channel'], text: "Hi <@#{data['user']}>!", as_user: true
+  end
+
+  def party_on(data)
+    Slack.chat_postMessage channel: data['channel'], text: "COMMENCING PARTY MODE", as_user: true
+    system './outlet.sh'
+  end
+
+  def party_off(data)
+    Slack.chat_postMessage channel: data['channel'], text: "BACK TO WORK YOU BUMS", as_user: true
+    system './outlet.sh'
+  end
+
+  def commands(data)
+    Slack.chat_postMessage channel: data['channel'], text: "You can do:
+                                                            \n- hi
+                                                            \n- marquee
+                                                            \n- announce
+                                                            \n- who needs thumbs
+                                                            \n- party on", as_user: true
+  end
+
+  def method_missing(data)
+    Slack.chat_postMessage channel: data['channel'], text: "I don't take orders from you, <@#{data['user']}>", as_user: true
+  end
+
+  def user_real_name(data)
+    Slack.users_list['members'].select{|i| i['id']== data['user']}.first['real_name']
+  end
+
+  def create_announcement(data, words)
+    Announcement.create(user: user_real_name(data), words: words)
   end
 
   attr_accessor :client
