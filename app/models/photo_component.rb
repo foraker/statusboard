@@ -1,4 +1,4 @@
-class PhotoClient
+class PhotoComponent
   def initialize(options = Rails.application.secrets)
     self.client = Twitter::REST::Client.new do |config|
       config.consumer_key        = options.photo_consumer_key
@@ -12,13 +12,8 @@ class PhotoClient
     client.mentions_timeline(count: count)
   end
 
-  def getProfile(tweet)
-    tweet.user.profile_image_uri('original')
-  end
-
-  def getURL
-    tweets = client.mentions_timeline(count: 1)
-    extract_urls(tweets[0].full_text)[0]
+  def url
+    UrlParser.first_url(latest_mentions(1).first.full_text)
   end
 
   private

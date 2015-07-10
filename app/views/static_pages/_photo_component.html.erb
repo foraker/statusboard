@@ -5,8 +5,8 @@
       <h3 class="panel-title">Photo Frame</h3>
     </div>
     <div class="panel-body">
-      <% if @status_board.has_image_url? then %>
-        <img src=<%= @status_board.photo_url %> >
+      <% if component.has_image_url? then %>
+        <%= image_tag component.url %>
       <% end %>
     </div>
   </div>
