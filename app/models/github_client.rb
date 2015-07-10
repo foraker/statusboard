@@ -8,10 +8,6 @@ class GithubClient
     PullRequest.wrap(prs, github)
   end
 
-  def populate_commits
-
-  end
-
   private
 
   attr_accessor :github
