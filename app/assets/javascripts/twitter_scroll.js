@@ -21,5 +21,7 @@ function scrollUp(el) {
     });
 };
 
-scrollDown($("#feed"));
-scrollDown($("#git-feed"));
+$(function() {
+  scrollDown($("#feed"));
+  scrollDown($("#git-feed"));
+});
