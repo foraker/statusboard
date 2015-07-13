@@ -8,6 +8,10 @@ class GithubComponent
     PullRequest.wrap(prs, github)
   end
 
+  def unapproved_pull_requests
+    pull_requests.reject(&:approved?)
+  end
+
   private
 
   attr_accessor :github
@@ -46,11 +50,11 @@ class PullRequest
   end
 
   def commit_size
-    pull_request_details.additions + pull_request_details.deletions
+    details.additions + details.deletions
   end
 
-  def pull_request_details
-    @pull_request_details = api_client.pull_requests.get 'foraker', repository_name, number
+  def details
+    @details = api_client.pull_requests.get 'foraker', repository_name, number
   end
 
   private

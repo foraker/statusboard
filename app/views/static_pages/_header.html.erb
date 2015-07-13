@@ -1,0 +1,22 @@
+<div id='header' >
+  <div id="colorstrip">
+    <div class="row">
+      <div id='logo' class="col-md-3">
+        <%= image_tag 'foraker_logo_360.png' %>
+      </div>
+      <div id='github-header' class="col-md-3">
+        <%= image_tag 'github_logo_360.png' %>
+        <span> <%= github.unapproved_pull_requests.length %> need thumbs </span>
+      </div>
+      <p class="col-md-3">
+        <span id="header-time"><%= Time.now.strftime("%l:%M:%S") %></span>
+        <span id="header-date">&nbsp; | &nbsp; <%= Date.today.strftime("%B %d, %Y") %></span>
+      </p>
+      <div id= "header-weather-image">
+        <%= image_tag weather.image %>
+      </div>
+      <span id="header-temp"> &nbsp; <%= weather.current_temp %>°F </span>
+      <span id="header-weather-desc"> &nbsp; <%= weather.condition %> </span>
+    </div>
+  </div>
+</div>

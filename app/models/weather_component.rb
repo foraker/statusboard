@@ -3,11 +3,11 @@ class WeatherComponent
     self.client = Weatherman::Client.new unit: 'f'
   end
 
-  def weather_image
+  def image
     weather.description_image.attributes['src'].value
   end
 
-  def weather_condition
+  def condition
     weather.condition['text']
   end
 
