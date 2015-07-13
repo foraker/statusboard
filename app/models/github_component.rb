@@ -46,11 +46,11 @@ class PullRequest
   end
 
   def commit_size
-    pull_request_files.additions + pull_request_files.deletions
+    pull_request_details.additions + pull_request_details.deletions
   end
 
-  def pull_request_files
-    @pull_request_files = api_client.pull_requests.get 'foraker', repository_name, number
+  def pull_request_details
+    @pull_request_details = api_client.pull_requests.get 'foraker', repository_name, number
   end
 
   private
