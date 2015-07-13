@@ -88,7 +88,7 @@ class SlackBot
   end
 
   def create_announcement(data, words)
-    Announcement.create(user: user_real_name(data), words: words)
+    Announcement.create(user: user_real_name(data).upcase, words: words.upcase)
   end
 
   attr_accessor :client

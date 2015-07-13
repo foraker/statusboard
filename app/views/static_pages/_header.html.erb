@@ -5,17 +5,19 @@
         <%= image_tag 'foraker_logo_360.png' %>
       </div>
       <div id='github-header' class="col-md-3">
-        <%= image_tag 'github_logo_360.png' %>
-        <span> <%= github.unapproved_pull_requests.length %> need thumbs </span>
+        <%#= image_tag 'github_logo_360.png' %>
+        <i class="fa fa-thumbs-up fa-lg" id="thumb-icon"></i>
+        <span><%= github.unapproved_pull_requests.length %></span>
+        <span id="need-thumbs">need thumbs</span>
       </div>
-      <p class="col-md-3">
+      <div class="col-md-1"></div>
+      <div class="col-md-1"></div>
         <span id="header-time"><%= Time.now.strftime("%l:%M:%S") %></span>
         <span id="header-date">&nbsp; | &nbsp; <%= Date.today.strftime("%B %d, %Y") %></span>
-      </p>
-      <div id= "header-weather-image">
-        <%= image_tag weather.image %>
-      </div>
-      <span id="header-temp"> &nbsp; <%= weather.current_temp %>°F </span>
+
+
+      <%= image_tag weather.image, id: "header-weather-image"%>
+      <span id="header-temp"> &nbsp; <%= weather.current_temp %>° </span>
       <span id="header-weather-desc"> &nbsp; <%= weather.condition %> </span>
     </div>
   </div>

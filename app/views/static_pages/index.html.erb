@@ -6,7 +6,7 @@
 
 <%= render 'header', weather: @status_board.weather_component, github: @status_board.github_component %>
 
-<marquee id="announcement"  scrollamount=17> </marquee>
+<marquee id="announcement"  scrollamount="17"></marquee>
 
 <% @status_board.components.each do |component| %>
   <%= render component.partial, component: component %>

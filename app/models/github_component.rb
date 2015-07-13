@@ -54,7 +54,7 @@ class PullRequest
   end
 
   def details
-    @details = api_client.pull_requests.get 'foraker', repository_name, number
+    @details ||= api_client.pull_requests.get 'foraker', repository_name, number
   end
 
   private
