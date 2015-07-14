@@ -5,9 +5,18 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "font-awesome";
+@font-face {
+    font-family: "Nexa Bold";
+    src: url(Nexa-Bold.otf) format("truetype");
+}
 
 $panel-width: 20%;
 $panel-height: 300px;
+$light-grey: #909090;
+$github-green: #CEF13B;
+$four-grey: #444444;
+$small-pad: 10px;
+$small-text: .8em;
 
 body {
   background-color: black;
@@ -27,23 +36,24 @@ h3 {
 
 marquee {
   font-size: 3em;
-  color: red;
-  font-weight: bold;
+  color: $github-green;
+  font-family: "Nexa Bold";
+  letter-spacing: 5px;
+  padding-top: $small-pad;
 }
 
 #twitter {
-  //width: $panel-width;
   width: 30%;
   padding-left: 60px;
   padding-top: 40px;
   float: left;
-
 }
 
 #feed {
   max-height: $panel-height;
   overflow-y: scroll;
-  margin: 10px;
+  margin: $small-pad;
+
   img{
     width:64px;
   }
@@ -73,6 +83,7 @@ marquee {
   padding-left: 30px;
   padding-top: 40px;
   float: left;
+
   img{
     width:100%;
     max-width:600px;
@@ -91,19 +102,23 @@ marquee {
     float: left;
     padding-left: 20px;
     padding-right: 20px;
-    p{
+
+    p {
       font-weight: bold;
       text-align: center;
     }
   }
+
   #temps {
     padding-left: 20px;
-    p{
+
+    p {
       font-weight: bold;
       text-align: center;
     }
   }
-  img{
+
+  img {
     width: 52px;
     #max-width:600px;
   }
@@ -121,11 +136,75 @@ marquee {
   padding-left: 30px;
   padding-top: 40px;
 
-  #git-feed{
-    //max-height: 360px;
+  #git-feed {
     max-height: $panel-height+20;
     overflow-y: scroll;
+  }
+}
 
+#header {
+
+  font-family: "Roboto";
+  font-weight: 300;
+  font-size: 2em;
+
+  #colorstrip {
+    width: 100%;
+    height: 60px;
+    background-color: $four-grey;
   }
 
+  #logo {
+    padding: $small-pad $small-pad $small-pad $small-pad*5;
+  }
+
+  #github-header {
+    color: $github-green;
+    padding-top: 12px;
+
+    #thumb-icon {
+      max-height: 35px;
+      padding-bottom: 5px;
+    }
+  }
+
+  #need-thumbs {
+    color: $light-grey;
+    padding-top: $small-pad;
+    font-size: $small-text;
+  }
+
+  #header-time {
+    display: inline-block;
+    color: white;
+    padding-top: 15px;
+    font-size: $small-text;
+    letter-spacing: 1px;
+  }
+
+  #header-date {
+    display: inline-block;
+    color: $light-grey;
+    padding-top: $small-pad;
+    font-size: $small-text;
+  }
+
+  #header-weather-image {
+    max-height: 38px;
+    padding-left: 20px;
+  }
+
+  #header-temp {
+    display: inline-block;
+    color: white;
+    padding-top: 15px;
+    font-size: $small-text;
+  }
+
+  #header-weather-desc {
+    display: inline-block;
+    color: $light-grey;
+    padding-top: 15px;
+    font-size: $small-text;
+  }
 }

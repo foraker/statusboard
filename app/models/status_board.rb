@@ -12,6 +12,14 @@ class StatusBoard
     ]
   end
 
+  def weather_component
+    @weather_component ||= WeatherComponent.new
+  end
+
+  def github_component
+    @github_component ||= GithubComponent.new
+  end
+
   private
 
   def twitter_component
@@ -20,14 +28,6 @@ class StatusBoard
 
   def photo_component
     @photo_component ||= PhotoComponent.new
-  end
-
-  def github_component
-    @github_component ||= GithubComponent.new
-  end
-
-  def weather_component
-    @weather_component ||= WeatherComponent.new
   end
 
   def parser_component

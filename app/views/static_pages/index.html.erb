@@ -2,10 +2,11 @@
   <!-- <meta http-equiv="refresh" content="300" /> -->
 </head>
 
-<!-- <h1 id="title">Status Board</h1>
-<h3 id="subtitle">Foraker's Current Status: Too cool for school</h3> -->
+<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,100,700' rel='stylesheet' type='text/css'>
 
-<marquee id="announcement"  scrollamount=17> </marquee>
+<%= render 'header', weather: @status_board.weather_component, github: @status_board.github_component %>
+
+<marquee id="announcement"  scrollamount="17"></marquee>
 
 <% @status_board.components.each do |component| %>
   <%= render component.partial, component: component %>
