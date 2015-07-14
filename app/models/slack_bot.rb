@@ -94,20 +94,25 @@ class SlackBot
 
   def insult(data)
     text = message data
-    target = /@\w{9}/.match(text, 13)[0]
     json = Net::HTTP.get URI("http://pleaseinsult.me/api?severity=#{severity(text)}")
     json = JSON.parse(json)
-    Slack.chat_postMessage channel: data['channel'], text: "#{json['insult']} <#{target}>", as_user: true
+    Slack.chat_postMessage channel: data['channel'], text: "#{json['insult']} <#{target(data)}>", as_user: true
   end
 
   def message(data)
     data['text']
   end
 
+  def target(data)
+    /@\w{9}/.match(message(data), 13) ? /@\w{9}/.match(message(data), 13)[0] : "@#{data['user']}"
+  end
+
   def severity(text)
-    return 'mild' if text.include? 'mild'
-    return 'moderate' if text.include? 'moderate'
-    return 'extreme' if text.include? 'extreme'
+    case text
+      when /moderate/ then 'moderate'
+      when /extreme/  then 'extreme'
+      else                 'mild'
+    end
   end
 
   def user_real_name(data)
