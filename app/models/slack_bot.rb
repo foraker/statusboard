@@ -1,4 +1,6 @@
-require "slack"
+require 'slack'
+require 'net/http'
+require 'json'
 
 class SlackBot
   def initialize(options = Rails.application.secrets)
@@ -16,21 +18,23 @@ class SlackBot
 
     client.on :message do |data|
       case data['text']
-        when 'statusboard hi'
+        when "#{keyword} hi"
           hi data
-        when /^statusboard announce (.+)/
+        when /^#{keyword} announce (.+)/
           announce data, Regexp.last_match[1]
-        when /^statusboard marquee (.+)/
+        when /^#{keyword} marquee (.+)/
           marquee data, Regexp.last_match[1]
-        when 'statusboard who needs thumbs'
+        when "#{keyword} who needs thumbs"
           thumbs data
-        when 'statusboard party on'
+        when "#{keyword} party on"
           party_on data
-        when 'statusboard party off'
+        when "#{keyword} party off"
           party_off data
-        when 'statusboard commands'
+        when "#{keyword} help"
           commands data
-        when /^statusboard/
+        when /^#{keyword} insult/
+          insult data
+        when /^#{keyword}/
           method_missing data
         end
       end
@@ -42,6 +46,10 @@ class SlackBot
   end
 
   private
+
+  def keyword
+    "<@U073CAXCL>:"
+  end
 
   def announce(data, words)
     create_announcement data, words
@@ -76,11 +84,30 @@ class SlackBot
                                                             \n- marquee
                                                             \n- announce
                                                             \n- who needs thumbs
-                                                            \n- party on", as_user: true
+                                                            \n- party on
+                                                            \n- insult @user mild/moderate/extreme", as_user: true
   end
 
   def method_missing(data)
     Slack.chat_postMessage channel: data['channel'], text: "I don't take orders from you, <@#{data['user']}>", as_user: true
+  end
+
+  def insult(data)
+    text = message data
+    target = /@\w{9}/.match(text, 13)[0]
+    json = Net::HTTP.get URI("http://pleaseinsult.me/api?severity=#{severity(text)}")
+    json = JSON.parse(json)
+    Slack.chat_postMessage channel: data['channel'], text: "#{json['insult']} <#{target}>", as_user: true
+  end
+
+  def message(data)
+    data['text']
+  end
+
+  def severity(text)
+    return 'mild' if text.include? 'mild'
+    return 'moderate' if text.include? 'moderate'
+    return 'extreme' if text.include? 'extreme'
   end
 
   def user_real_name(data)
