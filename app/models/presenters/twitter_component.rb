@@ -1,7 +1,7 @@
 module Presenters
   class TwitterComponent < StatusBoardComponent
     def latest_tweets
-      @tweets ||= Tweet.wrap(latest_mentions(15))
+      @tweets ||= Tweet.wrap(latest_mentions(3))
     end
 
     private
