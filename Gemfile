@@ -35,7 +35,6 @@ gem 'github_api', '~> 0.12.3'
 gem 'font-awesome-rails', '~> 4.3.0.0'
 gem 'yahoo_weatherman', '~> 2.0.0'
 gem 'gruff', '~> 0.6.0'
-gem 'lita'
 gem 'lita-slack'
 gem 'slack-api', '~> 1.1.6'
 
