@@ -16,5 +16,6 @@
 //= require_self
 //= require_tree .
 //= require bootstrap-sprockets
+//= require moment
 
 window.Statusboard = {}
