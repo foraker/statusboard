@@ -37,6 +37,7 @@ gem 'yahoo_weatherman', '~> 2.0.0'
 gem 'gruff', '~> 0.6.0'
 gem 'lita-slack'
 gem 'slack-api', '~> 1.1.6'
+gem 'momentjs-rails'
 
 gem 'whenever', '~> 0.9.4'
 gem 'bootstrap-sass', '~> 3.3.5'
