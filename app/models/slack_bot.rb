@@ -39,10 +39,7 @@ class SlackBot
         end
       end
 
-    Thread.new do
       client.start
-    end
-
   end
 
   private
