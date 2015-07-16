@@ -147,6 +147,10 @@ marquee {
   font-weight: 300;
   font-size: 2em;
 
+  .row {
+    width: 100%;
+  }
+
   #colorstrip {
     width: 100%;
     height: 60px;
