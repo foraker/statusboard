@@ -355,7 +355,6 @@ DEPENDENCIES
   gruff (~> 0.6.0)
   jbuilder (~> 2.0)
   jquery-rails
-  lita
   lita-slack
   pg
   rack-cors
