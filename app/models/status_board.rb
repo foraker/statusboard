@@ -1,8 +1,4 @@
 class StatusBoard
-  def initialize
-    start_slack_bot
-  end
-
   def components
     [
       twitter_component,
@@ -32,9 +28,5 @@ class StatusBoard
 
   def parser_component
     @parser_component ||= UrlParser.new
-  end
-
-  def start_slack_bot
-    SlackBot.new
   end
 end
