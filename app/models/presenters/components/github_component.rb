@@ -11,10 +11,6 @@ module Presenters
         def self.wrap(pull_requests)
           pull_requests.map { |pull_request| new(pull_request) }
         end
-
-        def css_class
-          approved? ? 'success' : 'danger'
-        end
       end
     end
   end

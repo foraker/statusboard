@@ -1,27 +1,35 @@
 module Importers
   class GithubImporter
     def initialize(options = Rails.application.secrets)
-      self.github = Github.new user: "foraker", oauth_token: options.github_oauth
+      self.github = Github.new user: options.github_user, oauth_token: options.github_oauth
     end
 
     def import
-      prs = issues.select(&:pull_request?)
-      pulls = PullRequestImporter.wrap(prs, github)
-      pulls.each do |pull|
-        pull.import
+      mark_closed_pull_requests
+      pull_request_importers.each do |importer|
+        importer.import
       end
-    end
-
-    def unapproved_pull_requests
-      pull_requests.reject(&:approved?)
     end
 
     private
 
     attr_accessor :github
 
-    def issues
-      github.issues.list(org: 'foraker', filter: 'all')
+    def issues(options = Rails.application.secrets)
+      github.issues.list(org: options.github_org, filter: 'all')
+    end
+
+    def pull_request_importers
+      PullRequestImporter.wrap(pull_requests, github)
+    end
+
+    def pull_requests
+      @pull_requests ||= issues.select(&:pull_request?)
+    end
+
+    def mark_closed_pull_requests
+      PullRequest.where_github_id_not_in(pull_requests.map(&:id).map(&:to_s)).
+        update_all(closed_at: Time.now)
     end
   end
 
@@ -40,28 +48,28 @@ module Importers
     end
 
     def import
-      PullRequest.where(github_id: github_id).
-        create_with(
-          github_id:    github_id,
-          repository:   repository_name,
-          title:        title,
-          author:       user_login,
-          size:         commit_size,
-          thumbs:       thumbs,
-          url:          url,
-          published_at: published_at
-        ).first_or_create
+      pull = PullRequest.where(github_id: github_id).first_or_create
+      pull.update_attributes(params)
+      pull.save
     end
 
+    def params
+      {
+        repository:   repository_name,
+        title:        title,
+        author:       user_login,
+        size:         commit_size,
+        thumbs:       thumbs,
+        url:          url,
+        published_at: published_at,
+        closed_at:    nil
+      }
+    end
 
     def thumbs
       @thumbs ||= comments.sum do |comment|
         comment.body.scan(/:\+1:/).length
       end
-    end
-
-    def approved?
-      thumbs > 1
     end
 
     def repository_name
@@ -72,8 +80,8 @@ module Importers
       details.additions + details.deletions
     end
 
-    def details
-      @details ||= api_client.pull_requests.get 'foraker', repository_name, number
+    def details(options = Rails.application.secrets)
+      @details ||= api_client.pull_requests.get options.github_user, repository_name, number
     end
 
     def github_id

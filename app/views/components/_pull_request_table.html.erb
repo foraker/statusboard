@@ -1,0 +1,32 @@
+<div id="git">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title"><%= type.capitalize %> Pull Requests (<%= pull_requests.length %>)</h3>
+    </div>
+    <div id="git-feed">
+      <table class="table">
+        <tbody>
+          <tr id="top">
+            <th>Repository</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Size</th>
+            <th>Thumbs</th>
+          </tr>
+          <% pull_requests.each do |pull| %>
+            <tr class= "<%= type == "approved" ? "success" : "danger" %>">
+              <td id="repo-name"><%= pull.repository %></td>
+              <td><%= pull.title %></td>
+              <td><%= pull.author %></td>
+              <td><%= pull.size %></td>
+              <td>
+                <%= fa_stacked_icon "thumbs-o-up", base: "square-o" %>
+                <%= "x #{pull.thumbs}" %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

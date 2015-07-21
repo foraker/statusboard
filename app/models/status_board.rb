@@ -2,9 +2,7 @@ class StatusBoard
   def components
     [
       twitter_component,
-      # photo_component,
-       github_component#,
-      # weather_component
+      github_component
     ]
   end
 

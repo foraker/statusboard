@@ -11,11 +11,9 @@ module Importers
 
     def import
       tweets = latest_mentions(10)
-
       tweets.each do |tweet|
         TweetImporter.new(tweet).import
       end
-
     end
 
     private

@@ -8,6 +8,8 @@ class CreatePullRequests < ActiveRecord::Migration
       t.integer :size
       t.integer :thumbs
       t.datetime :published_at
+      t.datetime :created_at
+      t.datetime :closed_at
       t.string :url
     end
   end
