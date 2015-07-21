@@ -46,6 +46,7 @@ gem 'frosting'
 group :development do
   gem 'capistrano-rails'
   gem 'capistrano-bundler'
+  gem 'pry'
 end
 
 group :development, :test do
