@@ -3,4 +3,5 @@ Rails.application.routes.draw do
   root 'static_pages#index'
 
   resources :announcements, only: :index
+  resources :tweets
 end

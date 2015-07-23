@@ -1,0 +1,11 @@
+<%=
+  render 'components/pull_request_table',
+          pull_requests: component.approved_pull_requests,
+          type: 'approved'
+%>
+
+<%=
+  render 'components/pull_request_table',
+          pull_requests: component.unapproved_pull_requests,
+          type: 'unapproved'
+%>

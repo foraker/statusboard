@@ -2,9 +2,7 @@ class StatusBoard
   def components
     [
       twitter_component,
-      photo_component,
-      github_component,
-      weather_component
+      github_component
     ]
   end
 
@@ -13,13 +11,13 @@ class StatusBoard
   end
 
   def github_component
-    @github_component ||= GithubComponent.new
+    @github_component ||= Components::GithubComponent.new
   end
 
   private
 
   def twitter_component
-    @twitter_component ||= TwitterComponent.new
+    @twitter_component ||= Components::TwitterComponent.new
   end
 
   def photo_component

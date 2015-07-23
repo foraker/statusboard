@@ -11,7 +11,7 @@
 }
 
 $panel-width: 20%;
-$panel-height: 300px;
+$panel-height: 900px;
 $light-grey: #909090;
 $github-green: #CEF13B;
 $four-grey: #444444;
@@ -43,8 +43,8 @@ marquee {
 }
 
 #twitter {
-  width: 30%;
-  padding-left: 60px;
+  width: 20%;
+  padding-left: 35px;
   padding-top: 40px;
   float: left;
 }
@@ -131,8 +131,8 @@ marquee {
 
 #git {
   float: left;
-  width: 35%;
-  padding-left: 30px;
+  width: 40%;
+  padding-left: 5px;
   padding-top: 40px;
 
   #git-feed {

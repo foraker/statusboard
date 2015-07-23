@@ -5,16 +5,16 @@
       <h3 class="panel-title">Twitter Feed</h3>
     </div>
     <div id="feed">
-      <% component.latest_tweets.each_with_index do |tweet, i| %>
+      <% component.tweets.each do |tweet| %>
         <div class="media">
           <div class="media-left">
-            <a href= <%= tweet.user.uri %> >
-              <img class="media-object" src="<%= component.profile_image(tweet) %>">
+            <a href="<%= tweet.tweet_url %>">
+              <img class="media-object" src="<%= tweet.image_url %>">
             </a>
           </div>
           <div class="media-body">
             <h4 class="media-heading">
-              <%= "#{tweet.user.screen_name}: " %>
+              <%= "#{tweet.author}: " %>
             </h4>
               <%= raw tweet.text %>
           </div>
