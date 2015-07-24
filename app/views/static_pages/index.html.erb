@@ -4,7 +4,7 @@
 
 <link href='//fonts.googleapis.com/css?family=Roboto:400,300,100,700' rel='stylesheet' type='text/css'>
 
-<%= render 'header', weather: @status_board.weather_component, github: @status_board.github_component %>
+<%= render 'header', weather: @status_board.header.weather_component, github: @status_board.header.github_component %>
 
 <marquee id="announcement"  scrollamount="17"></marquee>
 
@@ -13,13 +13,12 @@
   <%= render 'indicators' %>
 
   <div class="carousel-inner" role="listbox">
-    <% @status_board.components.each_with_index do |component, index| %>
+    <% @status_board.pages.each_with_index do |page, index| %>
       <div class="item<%= ' active' if index == 0 %>">
-        <%= render component.partial, component: component %>
+        <%= render page.partial, page: page %>
       </div>
     <% end %>
   </div>
-
 </div>
 
 <script type="text/javascript">

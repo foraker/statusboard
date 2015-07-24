@@ -1,8 +1,8 @@
 module Presenters
   class StatusBoard < Base
-    def components
-      super.map do |component|
-        present(component, context: @context)
+    def pages
+      super.map do |page|
+        present(page, context: @context)
       end
     end
   end
