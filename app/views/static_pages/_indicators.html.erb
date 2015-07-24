@@ -1,0 +1,7 @@
+<!-- Indicators -->
+<ol class="carousel-indicators">
+  <li data-target="#carousel" data-slide-to="0" class="active"></li>
+  <% (1..@status_board.components.length-1).each do |i| %>
+    <li data-target="#carousel" data-slide-to="<%= i %>"></li>
+  <% end %>
+</ol>

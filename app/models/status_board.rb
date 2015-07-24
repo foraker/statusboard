@@ -2,12 +2,14 @@ class StatusBoard
   def components
     [
       twitter_component,
-      github_component
+      github_component,
+      weather_component,
+      #photo_component
     ]
   end
 
   def weather_component
-    @weather_component ||= WeatherComponent.new
+    @weather_component ||= Components::WeatherComponent.new
   end
 
   def github_component
@@ -21,7 +23,7 @@ class StatusBoard
   end
 
   def photo_component
-    @photo_component ||= PhotoComponent.new
+    @photo_component ||= Components::PhotoComponent.new
   end
 
   def parser_component
