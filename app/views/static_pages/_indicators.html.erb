@@ -1,0 +1,6 @@
+<!-- Indicators -->
+<ol class="carousel-indicators">
+  <% @status_board.pages.length.times do |i| %>
+    <li data-target="#carousel" data-slide-to="<%= i %>"<% if i.zero? %> class="active"<% end %>></li>
+  <% end %>
+</ol>

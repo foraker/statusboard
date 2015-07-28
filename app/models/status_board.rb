@@ -1,30 +1,26 @@
 class StatusBoard
-  def components
+  def pages
     [
-      twitter_component,
-      github_component
+      general_page,
+      pull_requests_page
     ]
   end
 
-  def weather_component
-    @weather_component ||= WeatherComponent.new
-  end
-
-  def github_component
-    @github_component ||= Components::GithubComponent.new
+  def header
+    @header ||= Pages::HeaderPage.new
   end
 
   private
 
-  def twitter_component
-    @twitter_component ||= Components::TwitterComponent.new
-  end
-
-  def photo_component
-    @photo_component ||= PhotoComponent.new
-  end
-
   def parser_component
     @parser_component ||= UrlParser.new
+  end
+
+  def general_page
+    @general ||= Pages::GeneralPage.new
+  end
+
+  def pull_requests_page
+    @pull_requests ||= Pages::PullRequestsPage.new
   end
 end
