@@ -1,8 +1,9 @@
 module Pages
   module Components
     class WeatherComponent
-      def initialize
+      def initialize(options = Rails.application.secrets)
         self.client = Weatherman::Client.new unit: 'f'
+        self.options = options
       end
 
       def image
@@ -27,10 +28,10 @@ module Pages
 
       private
 
-      attr_accessor :client
+      attr_accessor :client, :options
 
       def weather
-        @weather ||= client.lookup_by_woeid 2367231
+        @weather ||= client.lookup_by_woeid options.weather_woeid
       end
     end
   end
