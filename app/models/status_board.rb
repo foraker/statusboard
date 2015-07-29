@@ -2,7 +2,8 @@ class StatusBoard
   def pages
     [
       general_page,
-      pull_requests_page
+      pull_requests_page,
+      foraker_page
     ]
   end
 
@@ -22,5 +23,9 @@ class StatusBoard
 
   def pull_requests_page
     @pull_requests ||= Pages::PullRequestsPage.new
+  end
+
+  def foraker_page
+    @foraker ||= Pages::ForakerPage.new
   end
 end

@@ -17,5 +17,7 @@
 //= require_tree .
 //= require bootstrap-sprockets
 //= require moment
+//= require highcharts
+//= require highcharts/themes/gray
 
 window.Statusboard = {}
