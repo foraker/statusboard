@@ -4,7 +4,7 @@ require 'date'
 module Importers
   class AnalyticsImporter
     def initialize
-      @client  = Google::APIClient.new(:application_name => ENV['GA_APP_NAME'])
+      @client  = Google::APIClient.new(application_name: ENV['GA_APP_NAME'])
       key_file = File.join('config/analytics', ENV['GA_KEY_FILE_NAME'])
       key      = Google::APIClient::PKCS12.load_key(key_file, 'notasecret')
       service_account = Google::APIClient::JWTAsserter.new(
@@ -16,15 +16,15 @@ module Importers
     end
 
     def import
-      startDate = 1.year.ago.to_date.strftime("%Y-%m-%d")
-      endDate = Date.today.strftime("%Y-%m-%d")
-      results = @client.execute(:api_method => @analytics.data.ga.get, :parameters => {
-        'ids'         => "ga:" + ENV['GA_VIEW_ID'],
-        'start-date'  => startDate,
-        'end-date'    => endDate,
-        'metrics'     => "ga:visitors,ga:pageviews,ga:sessions",
-        'dimensions'  => "ga:year,ga:month,ga:day",
-        'sort'        => "ga:year,ga:month,ga:day"
+      start_date = 1.year.ago.to_date.strftime("%Y-%m-%d")
+      end_date = Date.today.strftime("%Y-%m-%d")
+      results = @client.execute(api_method: @analytics.data.ga.get, parameters: {
+        ids:             "ga:" + ENV['GA_VIEW_ID'],
+        :'start-date' => start_date,
+        :'end-date'   => end_date,
+        metrics:         "ga:visitors,ga:pageviews,ga:sessions",
+        dimensions:      "ga:year,ga:month,ga:day",
+        sort:            "ga:year,ga:month,ga:day"
       })
       unless results.error?
         storeResults(results.data)
@@ -36,7 +36,7 @@ module Importers
 
     def storeResults(results)
       results.rows.each do |result|
-        node = Node.where(date: date(result)).first_or_create
+        node = WebsiteTrafficPoint.where(date: date(result)).first_or_create
         node.update_attributes(params(result))
         node.save
       end

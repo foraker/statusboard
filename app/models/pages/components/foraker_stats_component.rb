@@ -21,7 +21,7 @@ module Pages
       private
 
       def nodes(count)
-        @nodes = Node.latest(count)
+        @nodes = WebsiteTrafficPoint.latest(count)
       end
 
       def categories(attribute, count, slice)

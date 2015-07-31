@@ -1,6 +1,6 @@
-class ForakerStatistics < ActiveRecord::Migration
+class WebsiteStatistics < ActiveRecord::Migration
   def change
-    create_table :foraker_statistics do |t|
+    create_table :website_analytics do |t|
       t.date       :date
       t.integer    :visitors
       t.integer    :pageviews

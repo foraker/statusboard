@@ -24,15 +24,6 @@ ActiveRecord::Schema.define(version: 20150729224226) do
     t.datetime "updated_at",   null: false
   end
 
-  create_table "foraker_statistics", force: :cascade do |t|
-    t.date     "date"
-    t.integer  "visitors"
-    t.integer  "pageviews"
-    t.integer  "sessions"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "pull_requests", force: :cascade do |t|
     t.string   "github_id"
     t.string   "repository"
@@ -55,6 +46,15 @@ ActiveRecord::Schema.define(version: 20150729224226) do
     t.string   "tweet_url"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+  end
+
+  create_table "website_analytics", force: :cascade do |t|
+    t.date     "date"
+    t.integer  "visitors"
+    t.integer  "pageviews"
+    t.integer  "sessions"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
