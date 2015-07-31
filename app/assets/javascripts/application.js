@@ -18,6 +18,8 @@
 //= require bootstrap-sprockets
 //= require moment
 //= require highcharts
+//= require highcharts/highcharts-more
 //= require highcharts/themes/gray
+//= require highcharts/themes/dark-unica
 
 window.Statusboard = {}

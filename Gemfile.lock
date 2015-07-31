@@ -157,7 +157,7 @@ GEM
     gruff (0.6.0)
       rmagick (>= 2.13.4)
     hashie (3.4.2)
-    highcharts-js-rails (0.2.1)
+    highcharts-rails (4.1.5)
       railties (>= 3.1)
     http (0.6.4)
       http_parser.rb (~> 0.6.0)
@@ -388,7 +388,7 @@ DEPENDENCIES
   grape-active_model_serializers
   grape-swagger-rails
   gruff (~> 0.6.0)
-  highcharts-js-rails
+  highcharts-rails
   jbuilder (~> 2.0)
   jquery-rails
   lita-slack

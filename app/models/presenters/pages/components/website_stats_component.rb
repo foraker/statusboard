@@ -1,7 +1,7 @@
 module Presenters
   module Pages
     module Components
-      class ForakerStatsComponent < Base
+      class WebsiteStatsComponent < Base
       end
     end
   end

@@ -38,7 +38,7 @@ gem 'gruff', '~> 0.6.0'
 gem 'lita-slack'
 gem 'slack-api', '~> 1.1.6'
 gem 'momentjs-rails'
-gem 'highcharts-js-rails'
+gem 'highcharts-rails'
 gem 'google-api-client'
 
 gem 'whenever', '~> 0.9.4'
