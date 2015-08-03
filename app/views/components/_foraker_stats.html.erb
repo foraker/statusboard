@@ -1,0 +1,14 @@
+<div id="month-chart" class = "chart"></div>
+<div id="year-chart"  class = "chart"></div>
+
+<script type="text/javascript">
+  new Statusboard.WebsiteTrafficChart({
+    el: $('#month-chart'),
+    data: <%= raw component.chart_month.to_json %>
+  });
+
+  new Statusboard.WebsiteTrafficChart({
+    el: $('#year-chart'),
+    data: <%= raw component.chart_year.to_json %>
+  });
+</script>

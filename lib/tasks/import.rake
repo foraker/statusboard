@@ -8,4 +8,8 @@ namespace :import do
     Importers::GithubImporter.new.import
   end
 
+  task analytics: :environment do
+    Importers::AnalyticsImporter.new.import
+  end
+
 end
