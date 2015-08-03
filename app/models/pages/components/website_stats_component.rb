@@ -40,7 +40,7 @@ module Pages
         end
 
         def categories
-          (0..nodes.length-1).step(slice).map do |slice|
+          (1..nodes.length-2).step(slice).map do |slice|
             nodes[slice].date.to_s
           end.reverse
         end
@@ -68,7 +68,7 @@ module Pages
           end
 
           def data
-            metric_data_by_slice[0...-1]
+            data = metric_data_by_slice[1...-1].reverse
           end
 
           def metric_data_by_slice
