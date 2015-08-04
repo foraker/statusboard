@@ -2,7 +2,7 @@ module Pages
   module Components
     class ProjectOverviewComponent
       def projects
-        Project.wrap(project_ids)
+        Project.wrap(project_ids).sort_by(&:name)
       end
 
       def project_ids(options = Rails.application.secrets)
