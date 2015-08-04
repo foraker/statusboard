@@ -12,4 +12,7 @@ namespace :import do
     Importers::AnalyticsImporter.new.import
   end
 
+  task pivotal: :environment do
+    Importers::PivotalImporter.new.import
+  end
 end
