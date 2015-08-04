@@ -1,9 +1,12 @@
 <table class="table" id="project-overview">
   <thead>
     <tr>
-      <th>Project Name</th>
-      <th>Average Cycle Time</th>
-      <th>
+      <th></th>
+      <th><%= image_tag 'cycle_time2.png' %></th>
+      <th><%= image_tag 'cc-logo.png' %></th>
+      <th><%= image_tag 'velocity.png' %></th>
+      <th><i class="fa fa-thumbs-up fa-2x"></i></th>
+      <th><%= image_tag 'circle_ci2.png' %></th>
     </tr>
   </thead>
   <tbody>
@@ -11,6 +14,10 @@
       <tr>
         <td><%= project.name %></td>
         <td><%= project.cycle_time %></td>
+        <td>TBD</td>
+        <td>TBD</td>
+        <td>TBD</td>
+        <td>TBD</td>
       </tr>
     <% end %>
   </tbody>
