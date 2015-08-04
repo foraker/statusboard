@@ -9,30 +9,31 @@ module Importers
     def import(options = Rails.application.secrets)
       project_ids = options.pivotal_project_ids.split(", ")
       project_ids.each do |project_id|
-        CycleTimeForAcceptedStories.new.run(project_id)
+        StoryImporter.new.import(project_id)
       end
     end
 
-    class CycleTimeForAcceptedStories
+    class StoryImporter
+      attr_accessor :project_id, :project_name
 
-      def run(project_id)
+      def import(project_id)
         stories = {}
         offset = 0
         limit = 100
         total = nil
         count = 0
-        project_name = get("projects/#{project_id}/", "")['name']
-        STDERR.print "#{project_name}: "
+        self.project_id = project_id
+        self.project_name = get("projects/#{project_id}/", "")['name']
+        print "#{project_name}: "
 
         begin
           activity_with_envelope = get("projects/#{project_id}/activity", "offset=#{offset}&envelope=true")
           activity_items = activity_with_envelope['data']
           total = activity_with_envelope['pagination']['total']
-
           activity_items.each do |activity|
             activity['changes'].each do |change_info|
               count+=1
-              STDERR.print ". " if (count + 1) % 100 == 0
+              print ". " if (count + 1) % 100 == 0
               if is_state_change(change_info)
                 story_id = change_info['id']
                 stories[story_id] ||= {}
@@ -46,10 +47,9 @@ module Importers
               end
             end
           end
-
           offset += activity_with_envelope['pagination']['limit']
         end while total > offset
-        STDERR.puts ""
+        puts ""
 
         stories.keys.each_slice(100) do |story_ids|
           search_results = get("projects/#{project_id}/search", "query=id:#{story_ids.join(',')}%20includedone:true")
@@ -59,7 +59,15 @@ module Importers
           end
         end
 
-        stories.values.select {|story_info| story_info['story_type'] == 'feature'}.each do |story|
+        save_stories feature_stories(stories)
+      end
+
+      def feature_stories(stories)
+        stories.values.select{|story_info| story_info['story_type'] == 'feature'}
+      end
+
+      def save_stories(stories)
+        stories.each do |story|
           PivotalStory.where(story_id: story['id']).
           create_with(
             project_id:     project_id,
