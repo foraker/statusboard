@@ -1,0 +1,17 @@
+<table class="table" id="project-overview">
+  <thead>
+    <tr>
+      <th>Project Name</th>
+      <th>Average Cycle Time</th>
+      <th>
+    </tr>
+  </thead>
+  <tbody>
+    <% component.projects.each do |project| %>
+      <tr>
+        <td><%= project.name %></td>
+        <td><%= project.cycle_time %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

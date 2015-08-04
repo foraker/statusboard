@@ -1,6 +1,7 @@
 class StatusBoard
   def pages
     [
+      project_overview_page,
       general_page,
       pull_requests_page,
       foraker_page
@@ -27,5 +28,9 @@ class StatusBoard
 
   def foraker_page
     @foraker ||= Pages::ForakerPage.new
+  end
+
+  def project_overview_page
+    @project_overview ||= Pages::ProjectOverviewPage.new
   end
 end
