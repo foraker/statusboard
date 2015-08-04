@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150729224226) do
+ActiveRecord::Schema.define(version: 20150804164317) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,17 @@ ActiveRecord::Schema.define(version: 20150729224226) do
     t.text     "words"
     t.string   "user"
     t.datetime "announced_at"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  create_table "pivotal_stories", force: :cascade do |t|
+    t.string   "project_id"
+    t.string   "story_id"
+    t.datetime "started_at"
+    t.datetime "accepted_at"
+    t.text     "story_name"
+    t.string   "project_name"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
   end

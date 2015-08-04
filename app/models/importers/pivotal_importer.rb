@@ -6,43 +6,26 @@ require 'time'
 module Importers
   class PivotalImporter
 
-    def import
-      CycleTimeForAcceptedStories.new.run
+    def import(options = Rails.application.secrets)
+      project_ids = options.pivotal_project_ids.split(", ")
+      project_ids.each do |project_id|
+        CycleTimeForAcceptedStories.new.run(project_id)
+      end
     end
 
     class CycleTimeForAcceptedStories
-      # set environment variables TOKEN and PROJECT_ID to appropriate values for your project.
-      @@tracker_host = ENV['TRACKER_HOST'] ||
-        # 'http://localhost:3000' ||  # comment this out to default to prod
-        'https://www.pivotaltracker.com'
-      @@token = ENV['TOKEN'] || 'TestToken'
-      @@project_id = ENV['PROJECT_ID'] || '101'
 
-      def duration(story_info)
-        secs  = story_info.to_int
-        mins  = secs / 60
-        hours = mins / 60
-        days  = hours / 24
-
-        if days > 0
-          "#{days} days and #{hours % 24} hours"
-        elsif hours > 0
-          "#{hours} hours and #{mins % 60} minutes"
-        elsif mins > 0
-          "#{mins} minutes and #{secs % 60} seconds"
-        elsif secs >= 0
-          "#{secs} seconds"
-        end
-      end
-
-      def run
+      def run(project_id)
         stories = {}
         offset = 0
         limit = 100
         total = nil
         count = 0
+        project_name = get("projects/#{project_id}/", "")['name']
+        STDERR.print "#{project_name}: "
+
         begin
-          activity_with_envelope = get("projects/#{@@project_id}/activity", "offset=#{offset}&envelope=true")
+          activity_with_envelope = get("projects/#{project_id}/activity", "offset=#{offset}&envelope=true")
           activity_items = activity_with_envelope['data']
           total = activity_with_envelope['pagination']['total']
 
@@ -68,31 +51,24 @@ module Importers
         end while total > offset
         STDERR.puts ""
 
-        # look up name and type for each story
         stories.keys.each_slice(100) do |story_ids|
-          search_results = get("projects/#{@@project_id}/search", "query=id:#{story_ids.join(',')}%20includedone:true")
+          search_results = get("projects/#{project_id}/search", "query=id:#{story_ids.join(',')}%20includedone:true")
           search_results['stories']['stories'].each do |story_hash|
             stories[story_hash['id']]['name'] = story_hash['name']
             stories[story_hash['id']]['story_type'] = story_hash['story_type']
           end
         end
 
-        # drop stories where we can't compute cycle time (including all releases), and compute it for the ones left
-        stories = stories.values.
-            # select {|story_info| story_info['story_type'] != 'release'}.
-
-            select {|story_info| story_info.has_key?('started_at') && story_info.has_key?('accepted_at') && story_info['story_type'] == "feature"}.
-            map do |story_info|
-              story_info['cycle_time'] = Time.parse(story_info['accepted_at']) - Time.parse(story_info['started_at'])
-              story_info
-            end
-
-        stories.
-            sort_by { |story_info| story_info['cycle_time'] }.
-            each do |story_info|
-              name =  story_info['name'] || '*deleted*'
-              puts sprintf("%12d:  cycle time was %-25.25s (%.40s#{name.length > 40 ? '...' : ''})", story_info['id'], duration(story_info['cycle_time']), name)
-            end
+        stories.values.select {|story_info| story_info['story_type'] == 'feature'}.each do |story|
+          PivotalStory.where(story_id: story['id']).
+          create_with(
+            project_id:     project_id,
+            project_name:   project_name,
+            started_at:     story['started_at'],
+            accepted_at:    story['accepted_at'] || nil,
+            story_name:     story['name']
+          ).first_or_create
+        end
       end
 
       def is_state_change(change_info)
@@ -101,17 +77,18 @@ module Importers
           change_info['new_values'].has_key?('current_state')
       end
 
-      def get(url, query)
+      def get(url, query, options = Rails.application.secrets)
+        token = options.pivotal_token
+        tracker_host = 'https://www.pivotaltracker.com'
+
         request_header = {
-          'X-TrackerToken' => @@token
+          'X-TrackerToken' => token
         }
 
-        uri_string = @@tracker_host + '/services/v5/' + url
-    #    puts uri_string    # print the URI of each GET request made
+        uri_string = tracker_host + '/services/v5/' + url
         resource_uri = URI.parse(uri_string)
-        # resource_uri.query = URI.encode_www_form(query)
         http = Net::HTTP.new(resource_uri.host, resource_uri.port)
-        http.use_ssl = @@tracker_host.start_with?('https')
+        http.use_ssl = tracker_host.start_with?('https')
 
         response = http.start do
           http.get(resource_uri.path + '?' + query, request_header)
