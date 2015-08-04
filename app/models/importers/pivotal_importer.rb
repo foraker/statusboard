@@ -1,7 +1,6 @@
 require 'net/https'
 require 'multi_json'
 require 'yaml'
-require 'time'
 
 module Importers
   class PivotalImporter
@@ -25,7 +24,6 @@ module Importers
         self.project_id = project_id
         self.project_name = get("projects/#{project_id}/", "")['name']
         print "#{project_name}: "
-
         begin
           activity_with_envelope = get("projects/#{project_id}/activity", "offset=#{offset}&envelope=true")
           activity_items = activity_with_envelope['data']
@@ -50,7 +48,6 @@ module Importers
           offset += activity_with_envelope['pagination']['limit']
         end while total > offset
         puts ""
-
         stories.keys.each_slice(100) do |story_ids|
           search_results = get("projects/#{project_id}/search", "query=id:#{story_ids.join(',')}%20includedone:true")
           search_results['stories']['stories'].each do |story_hash|
@@ -58,7 +55,6 @@ module Importers
             stories[story_hash['id']]['story_type'] = story_hash['story_type']
           end
         end
-
         save_stories feature_stories(stories)
       end
 
@@ -88,20 +84,16 @@ module Importers
       def get(url, query, options = Rails.application.secrets)
         token = options.pivotal_token
         tracker_host = 'https://www.pivotaltracker.com'
-
         request_header = {
           'X-TrackerToken' => token
         }
-
         uri_string = tracker_host + '/services/v5/' + url
         resource_uri = URI.parse(uri_string)
         http = Net::HTTP.new(resource_uri.host, resource_uri.port)
         http.use_ssl = tracker_host.start_with?('https')
-
         response = http.start do
           http.get(resource_uri.path + '?' + query, request_header)
         end
-
         MultiJson.load(response.body)
       end
     end
