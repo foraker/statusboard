@@ -16,15 +16,11 @@ module Pages
       end
 
       def average_cycle_time
-        @average_cycle_time ||= accepted_stories.average_duration_seconds
+        @average_cycle_time ||= PivotalStory.month_cycle_time(project_id)
       end
 
       def name
-        PivotalStory.for_project(project_id).first.project_name
-      end
-
-      def accepted_stories
-        PivotalStory.for_project(project_id).accepted
+        PivotalProject.project_name(project_id)
       end
     end
   end

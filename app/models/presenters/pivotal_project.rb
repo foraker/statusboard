@@ -12,8 +12,10 @@ module Presenters
           "#{hours} hours and #{minutes % 60} minutes"
         elsif minutes > 0
           "#{minutes} minutes and #{seconds % 60} seconds"
-        elsif seconds >= 0
+        elsif seconds > 0
           "#{seconds} seconds"
+        elsif seconds == 0
+          "No stories accepted"
         end
       end
 

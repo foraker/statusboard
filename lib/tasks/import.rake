@@ -12,7 +12,13 @@ namespace :import do
     Importers::AnalyticsImporter.new.import
   end
 
-  task pivotal: :environment do
-    Importers::PivotalImporter.new.import
+  task pivotal_update: :environment do
+    interval = 15.minutes.ago
+    ActivePivot::Importer.run(interval)
+  end
+
+  task pivotal_initial: :environment do
+    interval = 3.years.ago
+    ActivePivot::Importer.run(interval)
   end
 end
