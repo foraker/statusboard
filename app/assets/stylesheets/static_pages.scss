@@ -242,6 +242,10 @@ marquee {
     background-color: black;
   }
 
+  small {
+    font-size: 0.7em;
+  }
+
   th, td {
     text-align: center;
   }
@@ -251,6 +255,6 @@ marquee {
   }
 
   th {
-    padding-bottom: 30px;
+    padding-bottom: 15px;
   }
 }
