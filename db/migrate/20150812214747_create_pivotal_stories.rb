@@ -14,6 +14,8 @@ class CreatePivotalStories < ActiveRecord::Migration
       t.text :labels
       t.string :current_state
       t.text :tags, array: true, default: []
+      t.datetime :updated_at
+      t.datetime :created_at
     end
     add_index :pivotal_stories, :project_id
   end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150810195247) do
+ActiveRecord::Schema.define(version: 20150812214748) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,27 +25,33 @@ ActiveRecord::Schema.define(version: 20150810195247) do
   end
 
   create_table "pivotal_epic_stories", force: :cascade do |t|
-    t.integer "story_id"
-    t.integer "epic_id"
+    t.integer  "story_id"
+    t.integer  "epic_id"
+    t.datetime "updated_at"
+    t.datetime "created_at"
   end
 
   add_index "pivotal_epic_stories", ["epic_id"], name: "index_pivotal_epic_stories_on_epic_id", using: :btree
   add_index "pivotal_epic_stories", ["story_id"], name: "index_pivotal_epic_stories_on_story_id", using: :btree
 
   create_table "pivotal_epics", force: :cascade do |t|
-    t.integer "project_id"
-    t.integer "pivotal_id"
-    t.integer "label_id"
-    t.string  "name"
-    t.string  "url"
+    t.integer  "project_id"
+    t.integer  "pivotal_id"
+    t.integer  "label_id"
+    t.string   "name"
+    t.string   "url"
+    t.datetime "updated_at"
+    t.datetime "created_at"
   end
 
   add_index "pivotal_epics", ["project_id"], name: "index_pivotal_epics_on_project_id", using: :btree
 
   create_table "pivotal_projects", force: :cascade do |t|
-    t.integer "pivotal_id"
-    t.text    "name"
-    t.text    "point_scale"
+    t.integer  "pivotal_id"
+    t.text     "name"
+    t.text     "point_scale"
+    t.datetime "updated_at"
+    t.datetime "created_at"
   end
 
   create_table "pivotal_stories", force: :cascade do |t|
@@ -62,6 +68,8 @@ ActiveRecord::Schema.define(version: 20150810195247) do
     t.text     "labels"
     t.string   "current_state"
     t.text     "tags",          default: [], array: true
+    t.datetime "updated_at"
+    t.datetime "created_at"
   end
 
   add_index "pivotal_stories", ["project_id"], name: "index_pivotal_stories_on_project_id", using: :btree

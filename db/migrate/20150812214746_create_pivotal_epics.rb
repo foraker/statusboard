@@ -6,6 +6,8 @@ class CreatePivotalEpics < ActiveRecord::Migration
       t.integer :label_id
       t.string :name
       t.string :url
+      t.datetime :updated_at
+      t.datetime :created_at
     end
     add_index :pivotal_epics, :project_id
   end
