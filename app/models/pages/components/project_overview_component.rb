@@ -2,7 +2,7 @@ module Pages
   module Components
     class ProjectOverviewComponent
       def projects
-        PivotalProject.select{|project| project_ids.include?(project.pivotal_id.to_s)}.sort_by(&:name)
+        PivotalProject.with_id(project_ids).ordered_by_name
       end
 
       def project_ids(options = Rails.application.secrets)
