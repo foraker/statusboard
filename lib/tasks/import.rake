@@ -11,5 +11,4 @@ namespace :import do
   task analytics: :environment do
     Importers::AnalyticsImporter.new.import
   end
-
 end

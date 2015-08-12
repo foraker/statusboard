@@ -45,6 +45,8 @@ gem 'whenever', '~> 0.9.4'
 gem 'bootstrap-sass', '~> 3.3.5'
 gem 'frosting'
 
+gem "active_pivot", github: "foraker/active_pivot"
+
 group :development do
   gem 'capistrano-rails'
   gem 'capistrano-bundler'

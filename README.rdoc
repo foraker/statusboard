@@ -1,28 +1,36 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Foraker StatusBoard
+Providing up-to-the-date analytics, Tweets, pull requests, and more!
+View it at [status.foraker.com](http://status.foraker.com/)
 
-Things you may want to cover:
+## Installation
 
-* Ruby version
+```git clone git@github.com:foraker/statusboard.git```
 
-* System dependencies
+Then create the database
 
-* Configuration
+```rake db:create db:migrate```
 
-* Database creation
+Set up your ENV variables with keys and tokens (see [secrets.yml](config/secrets.yml))
 
-* Database initialization
+Finally, import your data
 
-* How to run the test suite
+```
+rake import:twitter
+rake import:github
+rake import:analytics
+rake import:pivotal_update
+```
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+(These commands may take a very long time)
 
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+## Contributing
+
+Bug reports and pull requests are welcome on GitHub at https://github.com/foraker/statusboard.
+
+
+## License
+
+The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
