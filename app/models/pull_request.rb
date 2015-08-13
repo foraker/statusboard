@@ -9,6 +9,18 @@ class PullRequest < ActiveRecord::Base
     order(:published_at).reverse_order
   end
 
+  def self.approved
+    all.select(&:approved?)
+  end
+
+  def self.unapproved
+    all.reject(&:approved?)
+  end
+
+  def self.for_repository(repository)
+    where(repository: repository)
+  end
+
   def self.where_github_id_not_in(github_ids)
     where("#{table_name}.github_id NOT IN (?)", github_ids)
   end
