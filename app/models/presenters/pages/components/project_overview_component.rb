@@ -3,7 +3,7 @@ module Presenters
     module Components
       class ProjectOverviewComponent < Base
         def projects
-          present_collection super, presenter: Presenters::PivotalProject
+          present_collection super
         end
       end
     end
