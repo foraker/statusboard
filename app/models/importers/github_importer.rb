@@ -73,7 +73,7 @@ module Importers
     end
 
     def repository_name
-      name.capitalize
+      name
     end
 
     def commit_size
