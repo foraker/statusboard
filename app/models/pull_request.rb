@@ -10,11 +10,11 @@ class PullRequest < ActiveRecord::Base
   end
 
   def self.approved
-    all.select(&:approved?)
+    where("#{table_name}.thumbs >= ?", 2)
   end
 
   def self.unapproved
-    all.reject(&:approved?)
+    where("#{table_name}.thumbs < ?", 2)
   end
 
   def self.for_repository(repository)
@@ -23,9 +23,5 @@ class PullRequest < ActiveRecord::Base
 
   def self.where_github_id_not_in(github_ids)
     where("#{table_name}.github_id NOT IN (?)", github_ids)
-  end
-
-  def approved?
-    thumbs >= 2
   end
 end

@@ -106,7 +106,7 @@ marquee {
 }
 
 #weather {
-  width: 30%;
+  width: 40%;
   padding-left: 60px;
   padding-top: 40px;
   height: 200px;
@@ -237,6 +237,8 @@ marquee {
   width: 1800px;
   height: 500px;
   font-size: 1.7em;
+  font-family: "Roboto";
+  font-weight: 300;
 
   thead {
     background-color: black;
@@ -256,5 +258,17 @@ marquee {
 
   th {
     padding-bottom: 15px;
+  }
+
+  .approved-pr-count, .unapproved-pr-count {
+    padding-left: $small-pad;
+    padding-right: $small-pad;
+  }
+
+  .approved-pr-count {
+    color: $github-green;
+  }
+  .unapproved-pr-count {
+    color: $light-grey;
   }
 }
