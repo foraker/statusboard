@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150812214748) do
+ActiveRecord::Schema.define(version: 20150813182954) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -73,6 +73,12 @@ ActiveRecord::Schema.define(version: 20150812214748) do
   end
 
   add_index "pivotal_stories", ["project_id"], name: "index_pivotal_stories_on_project_id", using: :btree
+
+  create_table "projects", force: :cascade do |t|
+    t.string "name"
+    t.string "repository"
+    t.string "pivotal_id"
+  end
 
   create_table "pull_requests", force: :cascade do |t|
     t.string   "github_id"
