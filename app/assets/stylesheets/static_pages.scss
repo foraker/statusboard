@@ -11,11 +11,12 @@
 }
 
 
-$light-grey:    #909090;
-$github-green:  #CEF13B;
-$fouraker-grey: #444444;
-$light-blue:    #41B2F6;
-$dark-blue:     #2183EB;
+$light-grey:     #909090;
+$github-green:   #CEF13B;
+$fouraker-grey:  #444444;
+$light-blue:     #41B2F6;
+$dark-blue:      #2183EB;
+$bootstrap-pink: #EFD6D6;
 
 $small-pad: 10px;
 $small-text: .8em;
@@ -296,7 +297,7 @@ h3 {
   }
 
   td {
-    text-align: left;
+    text-align: center;
     vertical-align: middle;
     padding-top: 20px;
     padding-bottom: 20px;
@@ -308,7 +309,7 @@ h3 {
 
   th {
     padding-bottom: 15px;
-    text-align: left;
+    text-align: center;
 
     .header-wrapper {
       display: inline-block;
@@ -323,6 +324,19 @@ h3 {
   .project-name {
     font-weight: bold;
     padding-left: 50px;
+    letter-spacing: 5px;
+    text-align: left;
+  }
+
+  .cycle-time {
+    text-align: left;
+  }
+
+  #cycle-time-header {
+    img {
+      padding-left: 60px;
+    }
+    text-align: left;
   }
 
   .approved-pr-count, .unapproved-pr-count {
@@ -334,6 +348,7 @@ h3 {
     color: $github-green;
   }
   .unapproved-pr-count {
-    color: $light-grey;
+    color: $bootstrap-pink;
+    font-weight: bold;
   }
 }
