@@ -5,7 +5,7 @@
       <th><%= image_tag 'cycle_time2.png' %><br/><small>Cycle Time (1 month)</small></th>
       <th><%= image_tag 'cc-logo.png' %><br/><small>Code Climate</small></th>
       <th><%= image_tag 'velocity.png' %><br/><small>Velocity</small></th>
-      <th><i class="fa fa-thumbs-up fa-2x"></i><br/><small>Open Pull Requests</small></th>
+      <th><i class="fa fa-thumbs-up fa-2x"></i><br/><small>Accepted | Unaccepted</small></th>
       <th><%= image_tag 'circle_ci2.png' %><br/><small>Circle CI</small></th>
     </tr>
   </thead>
@@ -16,7 +16,10 @@
         <td><%= project.cycle_time %></td>
         <td>TBD</td>
         <td>TBD</td>
-        <td>TBD</td>
+        <td>
+          <span class="approved-pr-count"><%= project.approved_pull_requests_count %></span>
+            | <span class="unapproved-pr-count"><%= project.unapproved_pull_requests_count %></span>
+        </td>
         <td>TBD</td>
       </tr>
     <% end %>

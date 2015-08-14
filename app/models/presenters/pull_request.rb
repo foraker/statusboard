@@ -1,7 +1,7 @@
 module Presenters
   class PullRequest < Base
     def repository
-      super.gsub(/[_-]/, ' ')
+      super.titleize
     end
   end
 end
