@@ -27,53 +27,8 @@ module Pages
         weather.forecasts.first['low']
       end
 
-      def five_day_forecast
-        weather.forecasts[1..4]
-      end
-
-      def image(code = condition_code)
-        case code
-          when 0, 1, 2
-            "tornado"
-          when 3, 4
-            "storm-showers"
-          when 5, 6, 7, 8
-            "snow-wind"
-          when 9, 10, 11, 12
-            "showers"
-          when 13, 14, 15, 16
-            "snowflake-cold"
-          when 17, 18, 19
-            "hail"
-          when 20, 21, 22
-            "fog"
-          when 23, 24
-            "strong-wind"
-          when 25
-            "thermometer-exterior"
-          when 26, 27, 28, 29, 30
-            "cloudy"
-          when 31
-            "night-clear"
-          when 32, 33, 34
-            "day-sunny"
-          when 35
-            "rain-mix"
-          when 36
-            "thermometer"
-          when 37, 38, 39
-            "thunderstorm"
-          when 40
-            "raindrops"
-          when 41, 42, 43
-            "snow"
-          when 44
-            "cloud"
-          when 45, 46, 47
-            "storm-showers"
-          else
-            "volcano"
-        end
+      def icon
+        Icon.from_code(condition_code)
       end
 
       private
@@ -82,6 +37,37 @@ module Pages
 
       def weather
         @weather ||= client.lookup_by_woeid options.weather_woeid
+      end
+
+      class Icon
+        def self.from_code(code)
+          new(code).to_s
+        end
+
+        def initialize(code, config_path = Rails.root.join('config/weather_icons.yml'))
+          self.code   = code
+          self.config = YAML.load_file(config_path).map { |config| OpenStruct.new(config) }
+        end
+
+        def to_s
+          configuration.icon
+        end
+
+        private
+
+        attr_accessor :code, :config
+
+        def configuration
+          matching_configuration || default_configuration
+        end
+
+        def matching_configuration
+          config.detect { |configuration| configuration.codes.include? code }
+        end
+
+        def default_configuration
+          OpenStruct.new(icon: "volcano")
+        end
       end
     end
   end
