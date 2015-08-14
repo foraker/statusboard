@@ -10,16 +10,25 @@
     src: url(Nexa-Bold.otf) format("truetype");
 }
 
-$panel-width: 20%;
-$panel-height: 900px;
-$light-grey: #909090;
-$github-green: #CEF13B;
+
+$light-grey:    #909090;
+$github-green:  #CEF13B;
 $fouraker-grey: #444444;
+$light-blue:    #41B2F6;
+$dark-blue:     #2183EB;
+
 $small-pad: 10px;
 $small-text: .8em;
+$padding-under-title: 20px;
+$padding-left-align: 55px;
+$panel-width: 20%;
+$panel-height: 900px;
+
 
 body {
   background-color: black;
+  font-family: "Roboto";
+  font-weight: 300;
 }
 
 h1 {
@@ -34,23 +43,47 @@ h3 {
   color: white;
 }
 
-marquee {
-  font-size: 3em;
-  color: $github-green;
-  font-family: "Nexa Bold";
-  letter-spacing: 5px;
-  padding-top: $small-pad;
+.panel-default {
+  border: 0px;
+}
+
+.panel-default > .panel-heading-custom {
+  height: 80px;
+  background-color: $light-blue;
+  color: white;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  .panel-title {
+    padding-top: 27px;
+    padding-left: 20px;
+    font-size: 2.5em;
+    font-family: "Nexa Bold";
+    letter-spacing: 5px;
+  }
 }
 
 .chart {
-  padding-left: 200px;
-  padding-top: 30px;
-  width: 1800px;
-  height: 450px;
+  padding-left: $padding-left-align;
+  padding-top: $padding-under-title;
+  width: 97%;
+  height: 37%;
+  .highcharts-title {
+   font-size: 2em !important;
+  }
+  .highcharts-legend {
+    text {
+     font-size: 2em !important;
+     text-transform: capitalize !important;
+    }
+  }
 }
 
 #page-title {
-  text-align: center;
+  padding-left: 55px;
+  padding-top: 20px;
+  font-family: "Roboto";
+  font-weight: 100;
+  font-size: 4em;
 }
 
 #carousel {
@@ -58,19 +91,24 @@ marquee {
 }
 
 #twitter {
-  width: 50%;
-  padding-left: 35px;
-  padding-top: 40px;
+  width: 48%;
+  padding-left: $padding-left-align;
+  padding-top: $padding-under-title;
   float: left;
-}
 
-#feed {
-  max-height: $panel-height;
-  margin: $small-pad;
-  font-size: 3em;
+  #feed {
+    padding: 20px;
+    max-height: $panel-height;
+    margin: $small-pad;
+    font-size: 2.5em;
 
-  img{
-    width:125px;
+    img {
+      width:125px;
+    }
+
+    .media-heading {
+      font-size: 1em;
+    }
   }
 }
 
@@ -106,36 +144,37 @@ marquee {
 }
 
 #weather {
-  width: 40%;
-  padding-left: 60px;
-  padding-top: 40px;
-  height: 200px;
+  width: 48%;
+  padding-left: 50px;
+  padding-top: $padding-under-title;
   float: left;
-  font-size: 3em;
+
+  .panel {
+    height: 350px;
+  }
 
   #pic-desc {
     float: left;
-    padding-left: 20px;
+    padding-left: 80px;
     padding-right: 20px;
+    font-size: 3em;
 
     p {
-      font-weight: bold;
       text-align: center;
+      padding-top: 30px;
     }
   }
 
   #temps {
-    padding-left: 20px;
-    padding-right: 20px;
+    padding: 30px 80px 0px 20px;
+    font-size: 3em;
     p {
-      font-weight: bold;
       text-align: right;
     }
   }
 
-  img {
-    width: 150px;
-    #max-width:600px;
+  .wi {
+    padding-top: 40px;
   }
 }
 
@@ -147,14 +186,21 @@ marquee {
 
 #git {
   float: left;
-  width: 50%;
-  padding-left: 25px;
-  padding-right: 25px;
-  padding-top: 40px;
+  width: 48.5%;
+  padding-left: $padding-left-align;
+  padding-top: $padding-under-title;
 
   #git-feed {
     max-height: $panel-height+20;
     font-size: 1.7em;
+
+    tbody > tr {
+      height: 80px;
+    }
+
+    td {
+      vertical-align: middle;
+    }
   }
 }
 
@@ -210,8 +256,9 @@ marquee {
   }
 
   #header-weather-image {
-    max-height: 38px;
+    padding-top: 15px;
     padding-left: 20px;
+    color: white;
   }
 
   #header-temp {
@@ -248,16 +295,34 @@ marquee {
     font-size: 0.7em;
   }
 
-  th, td {
-    text-align: center;
+  td {
+    text-align: left;
+    vertical-align: middle;
+    padding-top: 20px;
+    padding-bottom: 20px;
   }
 
-  td {
-    vertical-align: middle;
+  tr {
+    height: 110px;
   }
 
   th {
     padding-bottom: 15px;
+    text-align: left;
+
+    .header-wrapper {
+      display: inline-block;
+      text-align: center;
+    }
+  }
+
+  tbody > tr:nth-child(odd) > td {
+    background-color: #565656;
+  }
+
+  .project-name {
+    font-weight: bold;
+    padding-left: 50px;
   }
 
   .approved-pr-count, .unapproved-pr-count {

@@ -41,7 +41,7 @@ module Pages
 
         def categories
           (1..nodes.length-2).step(slice).map do |slice|
-            nodes[slice].date.to_s
+            nodes[slice].date
           end.reverse
         end
 
@@ -50,7 +50,7 @@ module Pages
         end
 
         def title
-          "Foraker.com Statistics (Past #{days} Days)"
+          "Past #{days} Days"
         end
 
         class Metric < Struct.new(:metric, :slice, :nodes)

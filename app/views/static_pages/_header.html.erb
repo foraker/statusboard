@@ -13,7 +13,7 @@
       <div class="col-md-1"></div>
         <span id="header-time"><%= Time.now.strftime("%l:%M:%S") %></span>
         <span id="header-date">&nbsp; | &nbsp; <%= Date.today.strftime("%B %d, %Y") %></span>
-      <%= image_tag weather.image, id: "header-weather-image"%>
+      <i class="wi wi-<%= weather.image %>" id="header-weather-image"></i>
       <span id="header-temp"> &nbsp; <%= weather.current_temp %>° </span>
       <span id="header-weather-desc"> &nbsp; <%= weather.condition %> </span>
     </div>

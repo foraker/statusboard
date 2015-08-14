@@ -12,6 +12,8 @@ class Statusboard.WebsiteTrafficChart
         x: -20
       xAxis:
         categories: chart.categories
+        tickInterval: 5
+        offset: 10
       yAxis:
         title: text: ' '
         plotLines: [ {
