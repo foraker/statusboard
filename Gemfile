@@ -26,6 +26,7 @@ gem 'momentjs-rails'
 gem 'highcharts-rails'
 gem 'google-api-client'
 gem 'active_pivot'
+gem 'weather-icons-rails'
 
 group :development do
   gem 'capistrano-rails'
