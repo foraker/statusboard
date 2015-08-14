@@ -4,6 +4,7 @@
 # You can define all roles on a single server, or split them:
 
 server 'status.local', user: 'odroid', roles: %w{app db web}
+config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
 # server 'example.com', user: 'deploy', roles: %w{app web}, other_property: :other_value
 # server 'db.example.com', user: 'deploy', roles: %w{db}
 
