@@ -3,7 +3,7 @@
     <tr>
       <th></th>
       <th>
-        <div class="header-wrapper">
+        <div id="cycle-time-header">
           <%= image_tag 'cycle_time2.png' %>
           <br>
           <small>Cycle Time (1 month)</small>
@@ -27,7 +27,7 @@
         <div class="header-wrapper">
           <i class="fa fa-thumbs-up fa-2x"></i>
           <br/>
-          <small>Open Pull Requests</small>
+          <small>Accepted | Unaccepted</small>
         </div>
       </th>
       <th>
@@ -43,7 +43,7 @@
     <% component.projects.each do |project| %>
       <tr>
         <td class="project-name"><%= project.name.upcase %></td>
-        <td><%= project.cycle_time %></td>
+        <td class="cycle-time"><%= project.cycle_time %></td>
         <td>TBD</td>
         <td>TBD</td>
         <td>
