@@ -1,11 +1,11 @@
 <div id="git">
   <div class="panel panel-default">
-    <div class="panel-heading">
-      <h3 class="panel-title"><%= type.capitalize %> Pull Requests (<%= pull_requests.length %>)</h3>
+    <div class="panel-heading-custom">
+      <h3 class="panel-title"><%= type.upcase %> (<%= pull_requests.length %>)</h3>
     </div>
     <div id="git-feed">
       <table class="table">
-        <tbody>
+        <thead>
           <tr id="top">
             <th>Repository</th>
             <th>Title</th>
@@ -13,6 +13,8 @@
             <th>Size</th>
             <th>Thumbs</th>
           </tr>
+        </thead>
+        <tbody>
           <% pull_requests.each do |pull| %>
             <tr class= "<%= type == "approved" ? "success" : "danger" %>">
               <td id="repo-name"><%= pull.repository %></td>
