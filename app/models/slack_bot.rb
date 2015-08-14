@@ -20,10 +20,6 @@ class SlackBot
       case data['text']
         when "#{keyword} hi"
           hi data
-        when /^#{keyword} announce (.+)/
-          announce data, Regexp.last_match[1]
-        when /^#{keyword} marquee (.+)/
-          marquee data, Regexp.last_match[1]
         when "#{keyword} who needs thumbs"
           thumbs data
         when "#{keyword} party on"
@@ -46,15 +42,6 @@ class SlackBot
 
   def keyword
     "<@U073CAXCL>:"
-  end
-
-  def announce(data, words)
-    create_announcement data, words
-    Slack.chat_postMessage channel: '#general', text: "@channel #{user_real_name(data)}: #{words}", as_user: true, link_names: true
-  end
-
-  def marquee(data, words)
-    create_announcement data, words
   end
 
   def thumbs(data)
@@ -114,10 +101,6 @@ class SlackBot
 
   def user_real_name(data)
     Slack.users_list['members'].select{|i| i['id']== data['user']}.first['real_name']
-  end
-
-  def create_announcement(data, words)
-    Announcement.create(user: user_real_name(data).upcase, words: words.upcase)
   end
 
   attr_accessor :client
