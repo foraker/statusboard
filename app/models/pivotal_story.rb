@@ -9,6 +9,12 @@ class PivotalStory < ActivePivot::Story
     (accepted_at - started_at).to_i - weekends_time
   end
 
+  def duration_all_days
+    (accepted_at - started_at).to_i
+  end
+
+  private
+
   def weekends_time
     weekends_count * 1.day.to_i
   end
@@ -20,12 +26,6 @@ class PivotalStory < ActivePivot::Story
   def date_range
     (started_at.to_date..accepted_at.to_date)
   end
-
-  def duration_all_days
-    (accepted_at - started_at).to_i
-  end
-
-  private
 
   def self.accepted_last_month(project_id)
     for_project(project_id).feature.started.accepted.last_month
