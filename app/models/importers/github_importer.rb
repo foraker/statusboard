@@ -68,7 +68,7 @@ module Importers
 
     def thumbs
       @thumbs ||= comments.sum do |comment|
-        comment.body.scan(/:\+1:/).length
+        comment.body.scan(/:\+1:|:fried_shrimp:|:thumbsup:|:sheep:|:ship:|:sailboat:|:boat:|:shipit:|:truck:|:cake:|:birthday:/).length
       end
     end
 
