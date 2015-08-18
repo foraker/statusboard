@@ -6,8 +6,20 @@ class PivotalStory < ActivePivot::Story
     average_duration_seconds(accepted_last_month(project_id))
   end
 
+  def self.in_progress
+    started.current_unstarted.unaccepted.order(:started_at).limit(10)
+  end
+
   def duration
     (accepted_at - started_at).to_i
+  end
+
+  def started_duration
+    duration_in_words((Time.zone.now   - started_at.to_datetime).to_i)
+  end
+
+  def project_name
+    PivotalProject.name_by_id(project_id)
   end
 
   private
@@ -26,6 +38,14 @@ class PivotalStory < ActivePivot::Story
 
   def self.accepted
     where.not(accepted_at: nil)
+  end
+
+  def self.unaccepted
+    where(accepted_at: nil)
+  end
+
+  def self.current_unstarted
+    where.not(current_state: ['unscheduled', 'unstarted'])
   end
 
   def self.last_month

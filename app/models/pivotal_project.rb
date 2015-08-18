@@ -10,7 +10,15 @@ class PivotalProject < ActivePivot::Project
     order(:name)
   end
 
+  def self.name_by_id(project_id)
+    find_by_pivotal_id(project_id).name
+  end
+
   def average_cycle_time
     PivotalStory.month_cycle_time(pivotal_id)
+  end
+
+  def cycle_time
+    duration_in_words(average_cycle_time)
   end
 end
