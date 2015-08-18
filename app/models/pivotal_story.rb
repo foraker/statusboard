@@ -1,5 +1,6 @@
 class PivotalStory < ActivePivot::Story
   validates :pivotal_id, :project_id, presence: true
+  include StoryDuration
 
   def self.month_cycle_time(project_id)
     average_duration_seconds(accepted_last_month(project_id))
