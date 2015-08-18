@@ -9,13 +9,13 @@
         <span><%= github.unapproved_pull_requests.length %></span>
         <span id="need-thumbs">need thumbs</span>
       </div>
-      <div class="col-md-1"></div>
-      <div class="col-md-1"></div>
+      <div id="time-weather">
         <span id="header-time"><%= Time.now.strftime("%l:%M:%S") %></span>
         <span id="header-date">&nbsp; | &nbsp; <%= Date.today.strftime("%B %d, %Y") %></span>
-      <i class="wi wi-<%= weather.image %>" id="header-weather-image"></i>
-      <span id="header-temp"> &nbsp; <%= weather.current_temp %>° </span>
-      <span id="header-weather-desc"> &nbsp; <%= weather.condition %> </span>
+        <i class="wi wi-<%= weather.image %>" id="header-weather-image"></i>
+        <span id="header-temp"> &nbsp; <%= weather.current_temp %>° </span>
+        <span id="header-weather-desc"> &nbsp; <%= weather.condition %> </span>
+      </div>
     </div>
   </div>
 </div>

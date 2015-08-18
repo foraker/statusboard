@@ -21,7 +21,7 @@ $bootstrap-pink: #EFD6D6;
 $small-pad: 10px;
 $small-text: .8em;
 $padding-under-title: 20px;
-$padding-left-align: 55px;
+$side-margins: 3%;
 $panel-width: 20%;
 $panel-height: 900px;
 
@@ -64,7 +64,7 @@ h3 {
 }
 
 .chart {
-  padding-left: $padding-left-align;
+  padding-left: $side-margins;
   padding-top: $padding-under-title;
   width: 97%;
   height: 37%;
@@ -80,7 +80,7 @@ h3 {
 }
 
 #page-title {
-  padding-left: 55px;
+  padding-left: $side-margins - 0.25%;
   padding-top: 20px;
   font-family: "Roboto";
   font-weight: 100;
@@ -88,18 +88,17 @@ h3 {
 }
 
 #carousel {
-  height: 90vh;
+  height: 92vh;
 }
 
 #twitter {
   width: 48%;
-  padding-left: $padding-left-align;
+  padding-left: $side-margins;
   padding-top: $padding-under-title;
   float: left;
 
   #feed {
     padding: 20px;
-    max-height: $panel-height;
     margin: $small-pad;
     font-size: 2.5em;
 
@@ -146,12 +145,16 @@ h3 {
 
 #weather {
   width: 48%;
-  padding-left: 50px;
+  padding-right: $side-margins;
   padding-top: $padding-under-title;
-  float: left;
+  float: right;
 
   .panel {
     height: 350px;
+  }
+
+  .wi {
+    padding-top: 40px;
   }
 
   #pic-desc {
@@ -173,10 +176,6 @@ h3 {
       text-align: right;
     }
   }
-
-  .wi {
-    padding-top: 40px;
-  }
 }
 
 #graph {
@@ -188,12 +187,11 @@ h3 {
 #git {
   float: left;
   width: 48.5%;
-  padding-left: $padding-left-align;
+  padding-left: $side-margins;
   padding-top: $padding-under-title;
 
-  #git-feed {
-    max-height: $panel-height+20;
-    font-size: 1.7em;
+  .table {
+    font-size: 1.55em;
 
     tbody > tr {
       height: 80px;
@@ -222,7 +220,7 @@ h3 {
   }
 
   #logo {
-    padding: $small-pad $small-pad $small-pad $small-pad*5;
+    padding: $small-pad $small-pad $small-pad $side-margins;
   }
 
   #github-header {
@@ -275,14 +273,19 @@ h3 {
     padding-top: 15px;
     font-size: $small-text;
   }
+
+  #time-weather {
+    float: right;
+    padding-right: $side-margins;
+  }
 }
 
 #project-overview {
   background-color: $fouraker-grey;
   color: white;
-  margin-left: 60px;
+  margin-left: $side-margins;
   margin-top: 100px;
-  width: 1800px;
+  width: 94%;
   height: 500px;
   font-size: 1.7em;
   font-family: "Roboto";
@@ -332,13 +335,6 @@ h3 {
     text-align: left;
   }
 
-  #cycle-time-header {
-    img {
-      padding-left: 60px;
-    }
-    text-align: left;
-  }
-
   .approved-pr-count, .unapproved-pr-count {
     padding-left: $small-pad;
     padding-right: $small-pad;
@@ -350,5 +346,12 @@ h3 {
   .unapproved-pr-count {
     color: $bootstrap-pink;
     font-weight: bold;
+  }
+
+  #cycle-time-header {
+    img {
+      padding-left: 60px;
+    }
+    text-align: left;
   }
 }
