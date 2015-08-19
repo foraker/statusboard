@@ -4,6 +4,7 @@ module Pages
       def initialize(options = Rails.application.secrets)
         self.client = Weatherman::Client.new unit: 'f'
         self.options = options
+        # raise
       end
 
       def condition
@@ -24,6 +25,10 @@ module Pages
 
       def low_temp
         weather.forecasts.first['low']
+      end
+
+      def five_day_forecast
+        weather.forecasts
       end
 
       def image
