@@ -1,7 +1,7 @@
 <div id="weather">
   <div class="panel panel-default">
     <div class="panel-heading-custom">
-      <h3 class="panel-title">TODAY'S WEATHER</h3>
+      <h3 class="panel-title">WEATHER</h3>
     </div>
     <div id="pic-desc">
       <i class="wi wi-<%= component.icon %> wi-3x"></i>
@@ -15,7 +15,7 @@
     <div id="five-day-forecast">
       <% component.five_day_forecast.each do |day| %>
         <div class="panel panel-default forecast">
-          <p><%= day['day'] %></p>
+          <p><%= day['day'].upcase %></p>
           <i class="wi wi-<%= component.icon(day['code']) %> wi-3x"></i>
           <p><%= "#{day['high']}°F" %></p>
           <p><%= "#{day['low']}°F" %></p>
