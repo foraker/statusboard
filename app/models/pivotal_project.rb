@@ -1,6 +1,5 @@
 class PivotalProject < ActivePivot::Project
   validates :pivotal_id, :name, presence: true
-  include StoryDuration
 
   def self.with_id(project_ids)
     where(pivotal_id: project_ids)

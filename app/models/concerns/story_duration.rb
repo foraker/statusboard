@@ -1,5 +1,6 @@
-module StoryDuration
+include ActionView::Helpers::TextHelper
 
+module StoryDuration
   def duration_in_words(seconds)
     Duration.new(seconds).to_s
   end
@@ -7,15 +8,15 @@ module StoryDuration
   class Duration < Struct.new(:seconds)
     def to_s
       if months > 0
-        "#{months} months and #{days % 30} days"
+        "#{pluralize months, 'month'} and #{pluralize days%30, 'day'}"
       elsif days > 0
-        "#{days} days and #{hours % 24} hours"
+        "#{pluralize days, 'day'} and #{pluralize hours%24, 'hour'}"
       elsif hours > 0
-        "#{hours} hours and #{minutes % 60} minutes"
+        "#{pluralize hours, 'hour'} and #{pluralize minutes%60, 'minute'}"
       elsif minutes > 0
-        "#{minutes} minutes and #{seconds % 60} seconds"
+        "#{pluralize minutes, 'minute'} and #{pluralize seconds%60, 'seconds'}"
       elsif seconds > 0
-        "#{seconds} seconds"
+        "#{pluralize seconds, 'second'}"
       elsif seconds == 0
         "No stories accepted"
       end
