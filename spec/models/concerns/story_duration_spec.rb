@@ -1,13 +1,14 @@
 require 'rails_helper'
 
-describe StoryDuration do
-  describe 'duration_in_words' do
-    started_at = ActiveSupport::TimeZone['UTC'].parse("12/08/2015 12:00:00")
-    accepted_at = ActiveSupport::TimeZone['UTC'].parse("14/08/2015 14:00:00")
-    story = FactoryGirl.create(:pivotal_story, started_at: started_at, accepted_at: accepted_at)
+class SomethingWithDuration
+  include StoryDuration
+end
 
+describe SomethingWithDuration do
+  describe '#duration_in_words' do
+    let(:story) { SomethingWithDuration.new.duration_in_words(2.days.to_i + 2.hours.to_i) }
     it 'returns the duration of a story in words' do
-      expect(story.duration_in_words(story.duration)).to eq "2 days and 2 hours"
+      expect(story).to eq "2 days and 2 hours"
     end
   end
 end
