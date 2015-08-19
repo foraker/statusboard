@@ -16,7 +16,7 @@
       <% component.five_day_forecast.each do |day| %>
         <div class="panel panel-default forecast">
           <p><%= day['day'] %></p>
-          <i class="wi wi-<%= component.image(day['code']) %> wi-3x"></i>
+          <i class="wi wi-<%= component.icon(day['code']) %> wi-3x"></i>
           <p><%= "#{day['high']}°F" %></p>
           <p><%= "#{day['low']}°F" %></p>
         </div>

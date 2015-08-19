@@ -27,8 +27,12 @@ module Pages
         weather.forecasts.first['low']
       end
 
-      def icon
-        Icon.from_code(condition_code)
+      def five_day_forecast
+        weather.forecasts[1..4]
+      end
+
+      def icon(code = condition_code)
+        Icon.from_code(code)
       end
 
       private
