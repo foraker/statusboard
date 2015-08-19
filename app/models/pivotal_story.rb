@@ -6,19 +6,23 @@ class PivotalStory < ActivePivot::Story
   end
 
   def self.in_progress
-    started.current_unstarted.unaccepted.order(:started_at).limit(10)
+    started.current_state_unstarted.unaccepted.order(:started_at).limit(10)
   end
 
   def duration
     (accepted_at - started_at).to_i
   end
 
-  def started_duration
-    duration_in_words((Time.zone.now   - started_at.to_datetime).to_i)
+  def project_by_id
+    PivotalProject.find_by_pivotal_id(project_id)
   end
 
   def project_name
-    PivotalProject.name_by_id(project_id)
+    project_by_id.name
+  end
+
+  def story
+    PivotalStory.find_by_pivotal_id(pivotal_id)
   end
 
   private
@@ -43,7 +47,7 @@ class PivotalStory < ActivePivot::Story
     where(accepted_at: nil)
   end
 
-  def self.current_unstarted
+  def self.current_state_unstarted
     where.not(current_state: ['unscheduled', 'unstarted'])
   end
 
