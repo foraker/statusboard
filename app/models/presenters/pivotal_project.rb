@@ -7,13 +7,13 @@ module Presenters
     class Duration < Struct.new(:seconds)
       def to_s
         if days > 0
-          "#{days} days and #{hours % 24} hours"
+          "#{days} #{"day".pluralize(days)} and #{hours % 24} #{"hour".pluralize(hours)}"
         elsif hours > 0
-          "#{hours} hours and #{minutes % 60} minutes"
+          "#{hours} #{"hour".pluralize(hours)} and #{minutes % 60} #{"minute".pluralize(minutes)}"
         elsif minutes > 0
-          "#{minutes} minutes and #{seconds % 60} seconds"
+          "#{minutes} #{"minute".pluralize(minutes)} and #{seconds % 60} #{"second".pluralize(seconds)}"
         elsif seconds > 0
-          "#{seconds} seconds"
+          "#{seconds} #{"second".pluralize(seconds)}"
         elsif seconds == 0
           "No stories accepted"
         end
