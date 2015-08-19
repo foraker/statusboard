@@ -4,7 +4,6 @@ module Pages
       def initialize(options = Rails.application.secrets)
         self.client = Weatherman::Client.new unit: 'f'
         self.options = options
-        # raise
       end
 
       def condition

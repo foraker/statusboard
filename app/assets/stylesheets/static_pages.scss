@@ -171,26 +171,12 @@ h3 {
   padding-top: $padding-under-title;
   float: right;
 
-  .forecast {
-    width: 100px;
-    margin-left: 8%;
-    margin-right: 4%;
-    margin-top: 20px;
-    clear: both;
-    background-color: $light-blue;
-    color: white;
-    display: inline-block;
-    text-align: center;
-    padding: 10px 10px 10px 10px;
-
-    .wi {
-      padding-bottom: 20px;
-    }
+  .panel {
+    height: 350px;
   }
 
-  #five-day-forecast {
-    clear: both;
-    margin: 0 auto;
+  .wi {
+    padding-top: 40px;
   }
 
   #pic-desc {
@@ -203,16 +189,11 @@ h3 {
       text-align: center;
       padding-top: 30px;
     }
-
-    .wi {
-      padding-top: 40px;
-    }
   }
 
   #temps {
     padding: 30px 80px 0px 20px;
     font-size: 3em;
-
     p {
       text-align: right;
     }
