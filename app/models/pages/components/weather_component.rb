@@ -28,11 +28,11 @@ module Pages
       end
 
       def five_day_forecast
-        weather.forecasts
+        weather.forecasts[1..4]
       end
 
-      def image
-        case condition_code
+      def image(code = condition_code)
+        case code
           when 0, 1, 2
             "tornado"
           when 3, 4
