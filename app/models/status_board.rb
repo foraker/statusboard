@@ -1,7 +1,7 @@
 class StatusBoard
   def pages
     [
-      pivotal_stories_page,
+      open_stories_page,
       project_overview_page,
       general_page,
       pull_requests_page,
@@ -35,7 +35,7 @@ class StatusBoard
     @project_overview ||= Pages::ProjectOverviewPage.new
   end
 
-  def pivotal_stories_page
-    @pivotal_stories ||= Pages::PivotalStoriesPage.new
+  def open_stories_page
+    @open_stories ||= Pages::OpenStoriesPage.new
   end
 end
