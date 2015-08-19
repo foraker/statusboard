@@ -335,6 +335,8 @@ h3 {
   th {
     padding-bottom: 15px;
     text-align: center;
+    font-family: "Roboto";
+    font-weight: 300;
 
     .header-wrapper {
       display: inline-block;
@@ -368,6 +370,75 @@ h3 {
   .unapproved-pr-count {
     color: $bootstrap-pink;
     font-weight: bold;
+  }
+
+  #cycle-time-header {
+    img {
+      padding-left: 60px;
+    }
+    text-align: left;
+  }
+}
+
+#open-stories-table{
+  background-color: $fouraker-grey;
+  color: white;
+  margin-left: 60px;
+  margin-top: 10px;
+  width: 94%;
+  height: 50%;
+  font-size: 1.7em;
+  font-family: "Roboto";
+  font-weight: 300;
+
+  thead {
+    background-color: black;
+  }
+
+  small {
+    font-size: 0.7em;
+  }
+
+  td {
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  tr {
+    height: 70px;
+  }
+
+  th {
+    padding-bottom: 15px;
+    text-align: center;
+    font-family: "Roboto";
+    font-weight: 300;
+
+    .header-wrapper {
+      display: inline-block;
+      text-align: center;
+    }
+  }
+
+  .fa-star {
+    color: $github-green;
+  }
+
+  tbody > tr:nth-child(odd) > td {
+    background-color: #565656;
+  }
+
+  .story-name {
+    padding-left: 50px;
+    text-align: left;
+    width: 50%;
+    a {
+        color: white;
+    }
+  }
+
+  .cycle-time {
+    text-align: left;
   }
 
   #cycle-time-header {

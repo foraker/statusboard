@@ -1,0 +1,25 @@
+<table id="open-stories-table" class="table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Project</th>
+      <th>Duration</th>
+      <th>Story Type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% component.stories.each do |story| %>
+      <tr>
+        <td class="story-name"><%= link_to story.name, story.url %></td>
+        <td><%= story.project_name %></td>
+        <td><%= story.started_duration %></td>
+        <td>
+          <i class="fa fa-<%= story.icon %>"></i>
+          <% if story.story_type == 'feature' %>
+            x <%= story.estimate %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
