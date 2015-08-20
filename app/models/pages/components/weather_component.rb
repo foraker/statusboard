@@ -1,37 +1,16 @@
 module Pages
   module Components
     class WeatherComponent
+      delegate :high_temp, :low_temp, :condition, :condition_temp,
+        :current_temp, :icon, to: :todays_forecast
+
       def initialize(options = Rails.application.secrets)
         self.client = Weatherman::Client.new unit: 'f'
         self.options = options
       end
 
-      def condition
-        weather.condition['text']
-      end
-
-      def condition_code
-        weather.condition['code']
-      end
-
-      def current_temp
-        weather.condition['temp']
-      end
-
-      def high_temp
-        weather.forecasts.first['high']
-      end
-
-      def low_temp
-        weather.forecasts.first['low']
-      end
-
       def five_day_forecast
-        weather.forecasts[1..4]
-      end
-
-      def icon(code = condition_code)
-        Icon.from_code(code)
+        Forecast.wrap(weather.forecasts[1..4])
       end
 
       private
@@ -40,6 +19,56 @@ module Pages
 
       def weather
         @weather ||= client.lookup_by_woeid options.weather_woeid
+      end
+
+      def todays_forecast
+        @todays_forecast ||= TodaysForecast.new(weather.forecasts.first.merge(weather.condition))
+      end
+
+      class Forecast
+        attr_accessor :response
+
+        def self.wrap(responses)
+          responses.map { |response| self.new(response) }
+        end
+
+        def initialize(response)
+          self.response = response
+        end
+
+        def day_of_week
+          response['day'].upcase
+        end
+
+        def forecast_icon
+          icon
+        end
+
+        def condition_code
+          response['code']
+        end
+
+        def high_temp
+          response['high']
+        end
+
+        def low_temp
+          response['low']
+        end
+
+        def icon
+          Icon.from_code(condition_code)
+        end
+      end
+
+      class TodaysForecast < Forecast
+        def current_temp
+          response['temp']
+        end
+
+        def condition
+          response['text']
+        end
       end
 
       class Icon
