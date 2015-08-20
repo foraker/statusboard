@@ -13,7 +13,7 @@
         <td class="story-name"><%= link_to story.name, story.url %></td>
         <td><%= story.project_name %></td>
         <td><%= story.started_duration %></td>
-        <td>
+        <td class="story-type">
           <i class="fa fa-<%= story.icon %>"></i>
           <% if story.story_type == 'feature' %>
             x <%= story.estimate %>
