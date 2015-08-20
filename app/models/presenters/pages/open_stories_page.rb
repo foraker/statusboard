@@ -1,6 +1,6 @@
 module Presenters
   module Pages
-    class PivotalStoriesPage < PagePresenter
+    class OpenStoriesPage < PagePresenter
       presents :open_stories_component
     end
   end
