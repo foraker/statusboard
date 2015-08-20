@@ -1,4 +1,4 @@
-<table id="recent-stories-table" class="table-striped">
+<table class="table-striped stories-table">
   <thead>
     <tr>
       <th></th>
@@ -15,7 +15,7 @@
         <td><%= story.started_duration %></td>
         <td class="story-type">
           <i class="fa fa-<%= story.icon %>"></i>
-          <% if story.story_type == 'feature' %>
+          <% if story.estimate.present? %>
             x <%= story.estimate %>
           <% end %>
         </td>
