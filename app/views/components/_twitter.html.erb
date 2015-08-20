@@ -14,7 +14,8 @@
           </div>
           <div class="media-body">
             <h4 class="media-heading">
-              <%= "#{tweet.author}: " %>
+              <%= tweet.author %>
+              <small><%= tweet.date %></small>
             </h4>
               <%= raw tweet.text %>
           </div>
