@@ -18,11 +18,11 @@
           <% pull_requests.each do |pull| %>
             <tr class= "<%= type == "approved" ? "success" : "danger" %>">
               <td id="repo-name"><%= pull.repository %></td>
-              <td><%= pull.title %></td>
+              <td><%= link_to pull.title, pull.url %></td>
               <td><%= pull.author %></td>
               <td><%= pull.size %></td>
               <td>
-                <%= fa_stacked_icon "thumbs-o-up", base: "square-o" %>
+                <%= fa_icon "thumbs-o-up" %>
                 <%= "x #{pull.thumbs}" %>
               </td>
             </tr>
