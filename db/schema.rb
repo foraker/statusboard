@@ -16,14 +16,6 @@ ActiveRecord::Schema.define(version: 20150813182954) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "announcements", force: :cascade do |t|
-    t.text     "words"
-    t.string   "user"
-    t.datetime "announced_at"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-  end
-
   create_table "pivotal_epic_stories", force: :cascade do |t|
     t.integer  "story_id"
     t.integer  "epic_id"
