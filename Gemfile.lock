@@ -61,7 +61,7 @@ GEM
       sass (>= 3.3.0)
     buftok (0.2.0)
     builder (3.2.2)
-    byebug (6.0.0)
+    byebug (6.0.2)
     capistrano (3.4.0)
       i18n
       rake (>= 10.0.0)
