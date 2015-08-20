@@ -9,6 +9,10 @@ class PivotalStory < ActivePivot::Story
     started.current_state_unstarted.unaccepted.order(:started_at).limit(10)
   end
 
+  def self.recently_accepted
+    started.accepted.order("#{table_name}.accepted_at desc").limit(10)
+  end
+
   def duration
     DateRange.new(started_at, accepted_at).business_seconds
   end

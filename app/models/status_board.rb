@@ -1,6 +1,7 @@
 class StatusBoard
   def pages
     [
+      recent_stories_page,
       open_stories_page,
       project_overview_page,
       general_page,
@@ -37,5 +38,9 @@ class StatusBoard
 
   def open_stories_page
     @open_stories ||= Pages::OpenStoriesPage.new
+  end
+
+  def recent_stories_page
+    @recent_stories ||= Pages::RecentStoriesPage.new
   end
 end
