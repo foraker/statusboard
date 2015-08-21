@@ -1,6 +1,6 @@
 module Presenters
   class Project < Base
-    delegate :cycle_time, to: :pivotal_project
+    delegate :cycle_time, :current_velocity, to: :pivotal_project
 
     def pivotal_project
       present super

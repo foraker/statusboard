@@ -45,7 +45,7 @@
         <td class="project-name"><%= project.name.upcase %></td>
         <td class="cycle-time"><%= project.cycle_time %></td>
         <td>TBD</td>
-        <td>TBD</td>
+        <td><%= project.current_velocity %></td>
         <td>
           <span class="approved-pr-count"><%= project.approved_pull_requests_count %></span>
             | <span class="unapproved-pr-count"><%= project.unapproved_pull_requests_count %></span>
