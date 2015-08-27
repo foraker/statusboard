@@ -11,10 +11,10 @@ module Pages
       end
 
       class Chart
-        def initialize(options)
+        def initialize(options, config_path = Rails.root.join('config/graph_metrics.yml'))
           self.days    = options.fetch(:days)
           self.slice   = options.fetch(:slice)
-          self.metrics = options.fetch(:metrics, ['visitors', 'pageviews', 'sessions'])
+          self.metrics = YAML.load_file(config_path).map { |config| OpenStruct.new(config) }
         end
 
         def to_json
@@ -35,7 +35,7 @@ module Pages
 
         def series
           metrics.map do |metric|
-            Metric.new(metric, slice, nodes).as_json
+            Metric.new(metric.name, slice, nodes, metric.color).as_json
           end
         end
 
@@ -53,11 +53,12 @@ module Pages
           "Past #{days} Days"
         end
 
-        class Metric < Struct.new(:metric, :slice, :nodes)
+        class Metric < Struct.new(:metric, :slice, :nodes, :color)
           def as_json
             {
               name: name,
-              data: data
+              data: data,
+              color: color
             }
           end
 
