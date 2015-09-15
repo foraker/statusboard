@@ -1,7 +1,8 @@
 # Foraker StatusBoard
 
 Providing up-to-the-date analytics, Tweets, pull requests, and more!
-View it at [status.foraker.com](http://status.foraker.com/)
+
+![](doc/general_screenshot.png)
 
 ## Installation
 
