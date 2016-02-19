@@ -1,5 +1,5 @@
 <head>
-  <meta http-equiv="refresh" content="300" />
+  <meta http-equiv="refresh" content="600" />
 </head>
 
 <link href='//fonts.googleapis.com/css?family=Roboto:400,300,100,700' rel='stylesheet' type='text/css'>
@@ -7,7 +7,7 @@
 <%= render 'header', weather: @status_board.header.weather_component,
                      github: @status_board.header.github_component %>
 
-<div id="carousel" class="carousel slide" data-ride="carousel" data-pause="hover" data-interval="10000">
+<div id="carousel" class="carousel slide" data-ride="carousel" data-pause="hover" data-interval="20000">
   <%= render 'indicators' %>
   <div class="carousel-inner" role="listbox">
     <% @status_board.pages.each_with_index do |page, index| %>
