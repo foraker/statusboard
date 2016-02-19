@@ -3,4 +3,8 @@ Rails.application.routes.draw do
   root 'static_pages#index'
 
   resources :tweets
+
+  namespace :api do
+    resources :bathroom_updates
+  end
 end
