@@ -321,6 +321,28 @@ h3 {
     font-size: $small-text;
   }
 
+  #bathroom-monitor {
+    float: right;
+    padding-top: 15px;
+    padding-right: $side-margins;
+
+    .unoccupied {
+      background-color: green;
+    }
+
+    .occupied {
+      background-color: red;
+    }
+
+    .occupied, .unoccupied {
+      border-radius: 50%;
+      width: 25px;
+      height: 25px;
+      display: inline-block;
+      margin-left: 10px;
+    }
+  }
+
   #time-weather {
     float: right;
     padding-right: $side-margins;
