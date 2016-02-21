@@ -1,8 +1,8 @@
 module Api
   class BathroomUpdatesController < ApplicationController
     def index
-      @room_1 = BathroomUpdate.by_room(1).latest
-      @room_2 = BathroomUpdate.by_room(2).latest
+      @room_1 = present BathroomUpdate.by_room(1).latest
+      @room_2 = present BathroomUpdate.by_room(2).latest
 
       respond_to do |format|
         format.js

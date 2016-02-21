@@ -4,7 +4,7 @@ class Statusboard.BathroomMonitor
     $(@liveUpdate)
 
   liveUpdate: =>
-    $.ajax { url: 'api/bathroom_updates' }
+    $.get 'api/bathroom_updates'
 
 $ ->
   new Statusboard.BathroomMonitor

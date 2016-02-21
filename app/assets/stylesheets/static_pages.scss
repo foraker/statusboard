@@ -326,15 +326,15 @@ h3 {
     padding-top: 15px;
     padding-right: $side-margins;
 
-    .green-circle {
+    .unoccupied {
       background-color: green;
     }
 
-    .red-circle {
+    .occupied {
       background-color: red;
     }
 
-    .green-circle, .red-circle {
+    .occupied, .unoccupied {
       border-radius: 50%;
       width: 25px;
       height: 25px;
