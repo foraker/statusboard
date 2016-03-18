@@ -18,7 +18,7 @@ const int DIGITAL_PIN = 12; // Digital pin to be read
 // StatusBoard Details //
 /////////////////////////
 const char* host = "URL"; // Statusboard URL
-const int port = 3000;    // StatusBoard port (default 3000)
+const int port = 3000;    // StatusBoard port (default 3000 in development, 80 in production)
 
 //////////////////////
 // Bathroom Details //
@@ -26,13 +26,12 @@ const int port = 3000;    // StatusBoard port (default 3000)
 const int ROOM = 1;    // Bathroom number
 bool OCCUPIED = false; // Assume bathroom is unoccupied when it turns on
 
-
 ///////////////////////////
 // Function Declarations //
 ///////////////////////////
 void initHardware();
 void connectWiFi();
-void sendUpdate();
+boolean sendUpdate();
 void toggleOccupied();
 
 void setup()
@@ -47,8 +46,8 @@ void loop()
   delay(200);
 
   if(digitalRead(DIGITAL_PIN) == OCCUPIED) {
-    toggleOccupied();
-    sendUpdate();
+    if(sendUpdate())
+      toggleOccupied();
     delay(2000); //debouncing
   }
 }
@@ -59,7 +58,7 @@ void toggleOccupied()
   Serial.println("OCCUPIED: " + String(OCCUPIED));
 }
 
-void sendUpdate()
+boolean sendUpdate()
 {
   WiFiClient client;
 
@@ -67,11 +66,11 @@ void sendUpdate()
   Serial.println(host);
   if (!client.connect(host, port)) {
     Serial.println("connection failed");
-    return;
+    return false;
   }
 
   String url = "/api/bathroom_updates";
-  String PostData = "bathroom_update[occupied]=" + String(OCCUPIED) + "&bathroom_update[room]=" + String(ROOM);
+  String PostData = "bathroom_update[occupied]=" + String(!OCCUPIED) + "&bathroom_update[room]=" + String(ROOM);
 
   Serial.print("requesting URL: ");
   Serial.println(url);
@@ -86,6 +85,7 @@ void sendUpdate()
   client.println(PostData);
 
   client.stop();
+  return true;
 }
 
 void connectWiFi()
