@@ -10,6 +10,7 @@ require "action_mailer/railtie"
 require "action_view/railtie"
 require "sprockets/railtie"
 # require "rails/test_unit/railtie"
+require 'forecast_io'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -23,6 +24,11 @@ module Statusboard
         resource "*", headers: :any, methods: [:get, :post, :put, :delete, :options]
       end
     end
+
+    ForecastIO.configure do |configuration|
+      configuration.api_key = ENV['WEATHER_API']
+    end
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.

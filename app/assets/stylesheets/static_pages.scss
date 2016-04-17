@@ -185,8 +185,8 @@ h3 {
     padding: 10px;
     font-size: 2em;
 
-    .wi {
-      padding-bottom: 30px;
+    p:first-of-type {
+      margin-bottom: -15px;
     }
   }
 
@@ -197,17 +197,17 @@ h3 {
 
   #pic-desc {
     float: left;
-    padding-left: 80px;
+    padding-left: 60px;
     padding-right: 20px;
     font-size: 3em;
+
+    canvas {
+      margin-bottom: -60px;
+    }
 
     p {
       text-align: center;
       padding-top: 30px;
-    }
-
-    .wi {
-      padding-top: 40px;
     }
   }
 
@@ -301,8 +301,8 @@ h3 {
     font-size: $small-text;
   }
 
-  #header-weather-image {
-    padding-top: 15px;
+  canvas {
+    margin-bottom: -15px;
     padding-left: 20px;
     color: white;
   }

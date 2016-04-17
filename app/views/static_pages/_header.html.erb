@@ -12,7 +12,7 @@
       <div id="time-weather">
         <span id="header-time"><%= Time.now.strftime("%l:%M:%S") %></span>
         <span id="header-date">&nbsp; | &nbsp; <%= Date.today.strftime("%B %d, %Y") %></span>
-        <i class="wi wi-<%= weather.icon %>" id="header-weather-image"></i>
+        <canvas class="white-skycon" data-weather="<%= weather.forecast_icon %>" width="25" height="50"></canvas>
         <span id="header-temp"> &nbsp; <%= weather.current_temp %>° </span>
         <span id="header-weather-desc"> &nbsp; <%= weather.condition %> </span>
       </div>

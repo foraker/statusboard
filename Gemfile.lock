@@ -6,13 +6,6 @@ GIT
       railties (>= 3.2, < 5.0)
       sass (~> 3.2)
 
-GIT
-  remote: git://github.com/amclelland/yahoo_weatherman.git
-  revision: d6e9d5a1fc8080cb742c8c70c8e0f786c8e0259f
-  specs:
-    yahoo_weatherman (2.0.0)
-      nokogiri
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -122,6 +115,10 @@ GEM
       websocket-driver (>= 0.5.1)
     font-awesome-rails (4.4.0.0)
       railties (>= 3.2, < 5.0)
+    forecast_io (2.0.0)
+      faraday
+      hashie
+      multi_json
     frosting (0.0.5)
       activesupport
     github_api (0.12.4)
@@ -384,6 +381,7 @@ DEPENDENCIES
   coffee-rails
   factory_girl_rails
   font-awesome-rails
+  forecast_io
   frosting
   github_api
   google-api-client
@@ -409,7 +407,6 @@ DEPENDENCIES
   weather-icons-rails!
   web-console
   whenever
-  yahoo_weatherman!
 
 BUNDLED WITH
-   1.10.6
+   1.11.2

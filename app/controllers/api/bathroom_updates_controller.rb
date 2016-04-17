@@ -1,8 +1,8 @@
 module Api
   class BathroomUpdatesController < ApplicationController
     def index
-      @room_1 = present BathroomUpdate.by_room(1).latest
-      @room_2 = present BathroomUpdate.by_room(2).latest
+      @room_1 = present bathroom_1 if bathroom_1
+      @room_2 = present bathroom_2 if bathroom_2
 
       respond_to do |format|
         format.js
@@ -14,6 +14,16 @@ module Api
 
       @bathroom_update.save if @bathroom_update.valid?
       render nothing: true
+    end
+
+    private
+
+    def bathroom_1
+      BathroomUpdate.by_room(1).latest
+    end
+
+    def bathroom_2
+      BathroomUpdate.by_room(2).latest
     end
 
     def bathroom_update_params
