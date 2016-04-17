@@ -22,6 +22,8 @@ module Pages
         end
 
         def as_json
+          return unless nodes.present?
+
           {
             title:      title,
             categories: categories,

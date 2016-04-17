@@ -4,7 +4,7 @@
       <h3 class="panel-title">WEATHER</h3>
     </div>
     <div id="pic-desc">
-      <i class="wi wi-<%= component.icon %> wi-3x"></i>
+      <canvas class="black-skycon" data-weather="<%= component.forecast_icon %>" width="120" height="240"></canvas>
       <p><%= component.condition %></p>
     </div>
     <div id ="temps">
@@ -16,7 +16,7 @@
       <% component.five_day_forecast.each do |day| %>
         <div class="panel panel-default forecast">
           <p><%= day.day_of_week %></p>
-          <i class="wi wi-<%= day.forecast_icon %> wi-3x"></i>
+          <canvas class="white-skycon" data-weather="<%= day.forecast_icon %>" width="80" height="160"></canvas>
           <p><%= "#{day.high_temp}°F" %></p>
           <p><%= "#{day.low_temp}°F" %></p>
         </div>

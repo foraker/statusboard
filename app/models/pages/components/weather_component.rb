@@ -1,28 +1,50 @@
 module Pages
   module Components
     class WeatherComponent
-      delegate :high_temp, :low_temp, :condition, :condition_temp,
-        :current_temp, :icon, to: :todays_forecast
+      delegate :condition, :high_temp, :low_temp, :current_temp,
+        :forecast_icon, to: :todays_forecast
 
       def initialize(options = Rails.application.secrets)
-        self.client = Weatherman::Client.new unit: 'f'
         self.options = options
+        self.weather = ForecastIO.forecast(latitude, longitude)
       end
 
       def five_day_forecast
-        Forecast.wrap(weather.forecasts[1..4])
+        Forecast.wrap(daily_weather[1..4])
       end
 
       private
 
-      attr_accessor :client, :options
+      attr_accessor :weather, :options
 
-      def weather
-        @weather ||= client.lookup_by_woeid options.weather_woeid
+      def latitude
+        options.weather['weather_lat']
+      end
+
+      def longitude
+        options.weather['weather_long']
+      end
+
+      def daily_weather
+        @daily_weather ||= weather[:daily][:data]
       end
 
       def todays_forecast
-        @todays_forecast ||= TodaysForecast.new(weather.forecasts.first.merge(weather.condition))
+        @todays_forecast ||= TodaysForecast.new(
+          daily_weather.first.merge(current_attrs)
+        )
+      end
+
+      def current_attrs
+        current_weather.slice(
+          :temperature,
+          :summary,
+          :icon
+        )
+      end
+
+      def current_weather
+        weather[:currently]
       end
 
       class Forecast
@@ -37,68 +59,35 @@ module Pages
         end
 
         def day_of_week
-          response['day'].upcase
+          date.strftime("%a").upcase
         end
 
         def forecast_icon
-          icon
-        end
-
-        def condition_code
-          response['code']
+          response[:icon]
         end
 
         def high_temp
-          response['high']
+          response[:temperatureMax].round
         end
 
         def low_temp
-          response['low']
+          response[:temperatureMin].round
         end
 
-        def icon
-          Icon.from_code(condition_code)
+        private
+
+        def date
+          DateTime.strptime(response[:time].to_s,'%s')
         end
       end
 
       class TodaysForecast < Forecast
         def current_temp
-          response['temp']
+          response[:temperature].round
         end
 
         def condition
-          response['text']
-        end
-      end
-
-      class Icon
-        def self.from_code(code)
-          new(code).to_s
-        end
-
-        def initialize(code, config_path = Rails.root.join('config/weather_icons.yml'))
-          self.code   = code
-          self.config = YAML.load_file(config_path).map { |config| OpenStruct.new(config) }
-        end
-
-        def to_s
-          configuration.icon
-        end
-
-        private
-
-        attr_accessor :code, :config
-
-        def configuration
-          matching_configuration || default_configuration
-        end
-
-        def matching_configuration
-          config.detect { |configuration| configuration.codes.include? code }
-        end
-
-        def default_configuration
-          OpenStruct.new(icon: "volcano")
+          response[:summary]
         end
       end
     end
