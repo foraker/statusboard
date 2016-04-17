@@ -21,5 +21,6 @@
 //= require highcharts/highcharts-more
 //= require highcharts/themes/gray
 //= require highcharts/themes/dark-unica
+//= require skycons
 
 window.Statusboard = {}
