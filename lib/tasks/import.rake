@@ -11,4 +11,8 @@ namespace :import do
   task analytics: :environment do
     Importers::AnalyticsImporter.new.import
   end
+
+  task code_climate: :environment do
+    Importers::CodeClimateImporter.new.import
+  end
 end

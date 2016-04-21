@@ -3,8 +3,14 @@ class Project < ActiveRecord::Base
 
   validates :name, :repository, :pivotal_id, presence: true
 
+  has_many :code_climate_scores
+
   def self.ordered_by_name
     order(:name)
+  end
+
+  def self.with_repository(repository)
+    where(repository: repository)
   end
 
   def pull_requests
