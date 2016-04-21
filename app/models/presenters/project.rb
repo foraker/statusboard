@@ -13,5 +13,9 @@ module Presenters
     def unapproved_pull_requests_count
       unapproved_pull_requests.count
     end
+
+    def current_code_climate_score
+      code_climate_scores.latest.try(:score) || "N/A"
+    end
   end
 end

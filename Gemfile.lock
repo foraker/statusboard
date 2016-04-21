@@ -375,6 +375,7 @@ DEPENDENCIES
   github_api
   google-api-client
   highcharts-rails
+  httparty
   jbuilder
   jquery-rails
   lita-slack

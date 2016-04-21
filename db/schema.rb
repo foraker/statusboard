@@ -11,10 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160219182323) do
+ActiveRecord::Schema.define(version: 20160421055017) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "announcements", force: :cascade do |t|
+    t.text     "words"
+    t.string   "user"
+    t.datetime "announced_at"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
 
   create_table "bathroom_updates", force: :cascade do |t|
     t.boolean  "occupied"
@@ -22,6 +30,15 @@ ActiveRecord::Schema.define(version: 20160219182323) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "code_climate_scores", force: :cascade do |t|
+    t.integer  "project_id"
+    t.float    "score"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "code_climate_scores", ["project_id"], name: "index_code_climate_scores_on_project_id", using: :btree
 
   create_table "pivotal_epic_stories", force: :cascade do |t|
     t.integer  "story_id"
@@ -114,4 +131,5 @@ ActiveRecord::Schema.define(version: 20160219182323) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "code_climate_scores", "projects"
 end
